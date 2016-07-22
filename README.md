@@ -1,3 +1,3 @@
 # tiptap
 
-![Alt tag](login.png)
+![Alt tag](login.png =250x)
