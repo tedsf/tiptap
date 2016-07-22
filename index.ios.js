@@ -8,16 +8,33 @@ import {
   View,
   SegmentedControlIOS,
   Image,
+  Switch,
 } from 'react-native'
+
+
 
 class Project extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <View>
+        <NavigationBar
+            title={{ title:  'TipTap!' , tintColor:  'black' , }}
+            rightButton={{ title: 'Forward', tintColor: 'black' }}
+            style={{ backgroundColor:  "#D3D3D3" , }}
+            statusBar={{ tintColor:  "white" , }}
+        />
+        <Switch
+          value={(this.state && this.state.switchValue) || false}
+          onValueChange={(value) => {
+            this.setState({switchValue: value})
+          }}
+          tintColor={"rgba(230,230,230,1)"}
+          onTintColor={"rgba(68,219,94,1)"}
+        />
         <Text style={styles.welcome}>
-          Ted Day-Fratto
+          Ted SF
         </Text>
-        <Image 
+        <Image style={styles.container} 
           style={{
             width:  300 ,
             height:  200 ,
