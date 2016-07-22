@@ -1,6 +1,6 @@
 import NavigationBar from 'react-native-navbar'
-
 import React, { Component } from 'react';
+import Button from 'react-native-button';
 import {
   AppRegistry,
   StyleSheet,
@@ -9,9 +9,8 @@ import {
   SegmentedControlIOS,
   Image,
   Switch,
+  DatePickerIOS,
 } from 'react-native'
-
-
 
 class Project extends Component {
   render() {
@@ -20,21 +19,26 @@ class Project extends Component {
         <NavigationBar
             title={{ title:  'TipTap!' , tintColor:  'black' , }}
             rightButton={{ title: 'Forward', tintColor: 'black' }}
+            leftButton={{ title: 'Forward', tintColor: 'black' }}
             style={{ backgroundColor:  "#D3D3D3" , }}
             statusBar={{ tintColor:  "white" , }}
         />
-        <Switch
+        
+        
+        <Switch 
           value={(this.state && this.state.switchValue) || false}
           onValueChange={(value) => {
             this.setState({switchValue: value})
           }}
-          tintColor={"rgba(230,230,230,1)"}
-          onTintColor={"rgba(68,219,94,1)"}
+          tintColor={ "rgba(230,230,230,1)" }
+          onTintColor={ "rgba(68,219,94,1)" }
         />
+        
         <Text style={styles.welcome}>
           Ted SF
         </Text>
-        <Image style={styles.container} 
+        
+        <Image
           style={{
             width:  300 ,
             height:  200 ,
@@ -42,6 +46,38 @@ class Project extends Component {
           resizeMode={ "contain" }
           source={{uri:'http://i.imgur.com/iuPt0UT.png'}}
         />
+        
+        <Button style={{flex: 1, flexDirection: 'row'}}
+          style={{fontSize: 25, color: 'green'}}
+          styleDisabled={{color: 'red'}}
+          onPress={() => this._handlePress()}>
+          $1
+        </Button>        
+        <Button style={{flex: 1, flexDirection: 'row'}}
+          style={{fontSize: 25, color: 'green'}}
+          styleDisabled={{color: 'red'}}
+          onPress={() => this._handlePress()}>
+          $5
+        </Button>        
+        <Button style={{flex: 1, flexDirection: 'row'}}
+          style={{fontSize: 25, color: 'green'}}
+          styleDisabled={{color: 'red'}}
+          onPress={() => this._handlePress()}>
+          $5
+        </Button>        
+        <Button style={{flex: 1, flexDirection: 'row'}}
+          style={{fontSize: 25, color: 'green'}}
+          styleDisabled={{color: 'red'}}
+          onPress={() => this._handlePress()}>
+          $+
+        </Button>        
+        <Button style={{flex: 1, flexDirection: 'row'}}
+          style={{fontSize: 25, color: 'green'}}
+          styleDisabled={{color: 'red'}}
+          onPress={() => this._handlePress()}>
+          Tip!
+        </Button>
+    
       </View>
     );
   }
@@ -58,7 +94,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  },
+  },    
   instructions: {
     textAlign: 'center',
     color: '#333333',
