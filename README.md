@@ -12,8 +12,7 @@ A mobile based payment system build with a decoupled React Native Front and Rail
 - A user cannot recieves tips when beacon is disabled
 
 ## Wireframes
-<img src="login.png" width="170"><img src="tipping.png" width="170"><img src="tipping2.png" width="170">
-<img src="nousers.png" width="170"><img src="activeuser.png" width="170">
+<img src="login.png" width="170"><img src="tipping.png" width="170"><img src="tipping2.png" width="170"><img src="nousers.png" width="170"><img src="activeuser.png" width="170">
 
 ##Schema
 
