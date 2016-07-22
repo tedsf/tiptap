@@ -8,4 +8,4 @@
 
 ##Schema
 
-<img src="scheama.png">
+<img src="schema.png">
