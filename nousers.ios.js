@@ -35,49 +35,8 @@ class Project extends Component {
         />
         
         <Text style={styles.welcome}>
-          Nobody in your area is looking for tips!
+          Ted SF
         </Text>
-        
-        <Image
-          style={{
-            width:  300 ,
-            height:  200 ,
-          }}
-          resizeMode={ "contain" }
-          source={{uri:'http://i.imgur.com/iuPt0UT.png'}}
-        />
-        
-        <Button 
-          style={{fontSize: 25, color: 'green'}}
-          styleDisabled={{color: 'red'}}
-          onPress={() => this._handlePress()}>
-          $1
-        </Button>        
-        <Button 
-          style={{fontSize: 25, color: 'green'}}
-          styleDisabled={{color: 'red'}}
-          onPress={() => this._handlePress()}>
-          $5
-        </Button>        
-        <Button 
-          style={{fontSize: 25, color: 'green'}}
-          styleDisabled={{color: 'red'}}
-          onPress={() => this._handlePress()}>
-          $5
-        </Button>        
-        <Button 
-          style={{fontSize: 25, color: 'green'}}
-          styleDisabled={{color: 'red'}}
-          onPress={() => this._handlePress()}>
-          $+
-        </Button>        
-        <Button style={{flex: 1, flexDirection: 'row'}}
-          style={{fontSize: 25, color: 'green'}}
-          styleDisabled={{color: 'red'}}
-          onPress={() => this._handlePress()}>
-          Tip!
-        </Button>
-    
       </View>
     );
   }
