@@ -28,11 +28,18 @@ class Registration extends Component {
           placeholder="Username"
           onChangeText={(text) => this.setState({text})}
         />
-        <TextInput
+        <TextInput 
+          secureTextEntry={true}
           style={{height: 30}}
           placeholder="Password"
           onChangeText={(text) => this.setState({text})}
          /> 
+        <Button 
+          style={{fontSize: 25, color: 'green'}}
+          styleDisabled={{color: 'red'}}
+          onPress={() => this._handlePress()}>
+          Submit Registration
+        </Button> 
           
       </View>
     );
@@ -57,3 +64,5 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+
+export default Registration

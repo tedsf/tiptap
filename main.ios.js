@@ -17,6 +17,7 @@ import {
 } from 'react-native'
 
 import Error from './error'
+import Registration from './registration'
 
 class Main extends Component {
   navigate(routeName) {
@@ -89,6 +90,9 @@ class Main extends Component {
         </Button>
         <TouchableHighlight onPress={this.navigate.bind(this, "error")}>
           <Text>TO ERROR PAGE</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={this.navigate.bind(this, "registration")}>
+          <Text>Register</Text>
         </TouchableHighlight>
       </View>
     );
