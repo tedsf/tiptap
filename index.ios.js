@@ -15,39 +15,37 @@ import {
 
 import Main from './main'
 import Error from './error'
-import Nouser from './nouser'
+// import Nouser from './nouser'
 
 class Project extends Component {
-  renderScene(route, navigator) {
-    if (route.name === 'main') {
-      return <Main navigator={navigator} {...route.passProps} />
-    }
-    else if(route.name == 'nouser') {
-      return <Profile navigator={navigator} {...route.passProps}/>
-    }
-    else if (route.name === 'error') {
-      return <Error navigator={navigator} {...route.passProps} />
-    }
-
-  }
-
-  navigate(routeName) {
-    this.props.navigator.push({
-      name: routeName
-      // passProps: {name: routeName},
-    })
-  }
-
   render() {
-
     return (
-
       <Navigator
         initialRoute={{name:'main'}}
         renderScene={this.renderScene.bind(this)}
       />
     );
   }
+  
+  renderScene(route, navigator) {
+    if(route.name === 'main') {
+      return <Main navigator={navigator} {...route.passProps} />
+    }
+//     else if(route.name == 'nousers') {
+//       return <Profile navigator={navigator} {...route.passProps}/>
+//     }
+    if(route.name === 'error') {
+      return <Error navigator={navigator} {...route.passProps} />
+    }
+  }
+
+//   navigate(routeName) {
+//     this.props.navigator.push({
+//       name: routeName
+//       // passProps: {name: routeName},
+//     })
+//   }
+
 }
 
 const styles = StyleSheet.create({

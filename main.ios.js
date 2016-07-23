@@ -1,3 +1,5 @@
+'use strict';
+
 import NavigationBar from 'react-native-navbar'
 import React, { Component } from 'react';
 import Button from 'react-native-button';
@@ -7,6 +9,7 @@ import {
   Text,
   View,
   SegmentedControlIOS,
+  TouchableHighlight,
   Image,
   Switch,
   DatePickerIOS,
@@ -16,17 +19,21 @@ import {
 import Error from './error'
 
 class Main extends Component {
+  navigate(routeName) {
+    this.props.navigator.push({
+      name: routeName
+    });
+  }
   render() {
     return (
       <View>
         <NavigationBar
             title={{ title:  'TipTap!' , tintColor:  'black' , }}
             rightButton={{ title: 'Forward', tintColor: 'black' }}
-            leftButton={{ title: 'Forward', tintColor: 'black' }}
+            leftButton={{ title: 'Back', tintColor: 'black' }}
             style={{ backgroundColor:  "#D3D3D3" , }}
             statusBar={{ tintColor:  "white" , }}
         />
-        
         
         <Switch 
           value={(this.state && this.state.switchValue) || false}
@@ -80,11 +87,14 @@ class Main extends Component {
           onPress={() => this._handlePress()}>
           Tip!
         </Button>
-    
+        <TouchableHighlight onPress={this.navigate.bind(this, "error")}>
+          <Text>TO ERROR PAGE</Text>
+        </TouchableHighlight>
       </View>
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
