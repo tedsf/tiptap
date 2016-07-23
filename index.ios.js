@@ -1,6 +1,6 @@
-import NavigationBar from 'react-native-navbar'
-
 import React, { Component } from 'react';
+import NavigationBar from 'react-native-navbar'
+import Button from 'react-native-button';
 import {
   AppRegistry,
   StyleSheet,
@@ -8,26 +8,48 @@ import {
   View,
   SegmentedControlIOS,
   Image,
+  Switch,
+  DatePickerIOS,
+  Navigator,
 } from 'react-native'
+
+import Main from './main'
+import Error from './error'
+import Registration from './registration'
+import Active from './active'
 
 class Project extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Ted Day-Fratto
-        </Text>
-        <Image 
-          style={{
-            width:  300 ,
-            height:  200 ,
-          }}
-          resizeMode={ "contain" }
-          source={{uri:'http://i.imgur.com/iuPt0UT.png'}}
-        />
-      </View>
+      <Navigator
+        initialRoute={{name:'main'}}
+        renderScene={this.renderScene.bind(this)}
+      />
     );
   }
+  
+  renderScene(route, navigator) {
+    if(route.name === 'main') {
+      return <Main navigator={navigator} {...route.passProps} />
+    }
+    if(route.name === 'error') {
+      return <Error navigator={navigator} {...route.passProps} />
+    }    
+    if(route.name === 'active') {
+      return <Active navigator={navigator} {...route.passProps} />
+    }
+    if(route.name === 'registration') {
+      return <Registration navigator={navigator} {...route.passProps} />
+    }
+  }
+
+//   navigate(routeName) {
+//     this.props.navigator.push({
+//       name: routeName
+//       // passProps: {name: routeName},
+//     })
+//   }
+
 }
 
 const styles = StyleSheet.create({
@@ -41,7 +63,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  },
+  },    
   instructions: {
     textAlign: 'center',
     color: '#333333',
