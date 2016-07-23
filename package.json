@@ -10,6 +10,7 @@
     "react": "^15.1.0",
     "react-native": "^0.27.2",
     "react-native-button": "^1.6.0",
+    "react-native-form-generator": "^0.9.4",
     "react-native-navbar": "^1.5.0"
   }
 }
