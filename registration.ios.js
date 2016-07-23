@@ -14,7 +14,15 @@ import {
   Navigator,
 } from 'react-native'
 
+import Main from './main'
+
 class Registration extends Component {
+  navigate(routeName) {
+    this.props.navigator.push({
+      name: routeName
+    });
+  }
+  
   constructor(props) {
     super(props);
     this.state = {text: ''};
@@ -22,7 +30,7 @@ class Registration extends Component {
 
   render() {
     return (
-      <View style={{padding: 10}}>
+      <View style={styles.form}>
         <TextInput
           style={{height: 30}}
           placeholder="Username"
@@ -37,7 +45,7 @@ class Registration extends Component {
         <Button 
           style={{fontSize: 25, color: 'green'}}
           styleDisabled={{color: 'red'}}
-          onPress={() => this._handlePress()}>
+          onPress={this.navigate.bind(this, "main")}>
           Submit Registration
         </Button> 
           
@@ -62,6 +70,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
+  },
+  form: {
+    padding: 50,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
 });
 
