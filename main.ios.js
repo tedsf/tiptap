@@ -88,9 +88,6 @@ class Main extends Component {
           onPress={() => this._handlePress()}>
           Tip!
         </Button>
-        <TouchableHighlight onPress={this.navigate.bind(this, "error")}>
-          <Text>TO ERROR PAGE</Text>
-        </TouchableHighlight>
         <TouchableHighlight onPress={this.navigate.bind(this, "registration")}>
           <Text>Register</Text>
         </TouchableHighlight>

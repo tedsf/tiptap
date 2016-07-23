@@ -23,10 +23,10 @@ class Registration extends Component {
     });
   }
   
-  constructor(props) {
-    super(props);
-    this.state = {text: ''};
-  }
+//   constructor(props) {
+//     super(props);
+//     this.state = {text: ''};
+//   }
 
   render() {
     return (
