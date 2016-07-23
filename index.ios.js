@@ -15,6 +15,7 @@ import {
 
 import Main from './main'
 import Error from './error'
+import Registration from './registration'
 // import Nouser from './nouser'
 
 class Project extends Component {
@@ -36,6 +37,10 @@ class Project extends Component {
 //     }
     if(route.name === 'error') {
       return <Error navigator={navigator} {...route.passProps} />
+    }
+    
+    if(route.name === 'registration') {
+      return <Registration navigator={navigator} {...route.passProps} />
     }
   }
 
