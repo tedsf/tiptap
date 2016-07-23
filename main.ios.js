@@ -1,8 +1,8 @@
-'use strict';
+import { Button } from 'native-base';
 
 import NavigationBar from 'react-native-navbar'
 import React, { Component } from 'react';
-import Button from 'react-native-button';
+// import Button from 'react-native-button';
 import {
   AppRegistry,
   StyleSheet,
@@ -18,6 +18,7 @@ import {
 
 import Error from './error'
 import Registration from './registration'
+import Active from './active'
 
 class Main extends Component {
   navigate(routeName) {
@@ -58,42 +59,49 @@ class Main extends Component {
           source={{uri:'http://i.imgur.com/iuPt0UT.png'}}
         />
         
-        <Button 
-          style={{fontSize: 25, color: 'green'}}
-          styleDisabled={{color: 'red'}}
+        <Button bordered success
+//           style={{fontSize: 25, color: 'green'}}
           onPress={() => this._handlePress()}>
           $1
-        </Button>        
-        <Button 
-          style={{fontSize: 25, color: 'green'}}
-          styleDisabled={{color: 'red'}}
+        </Button>  
+        
+        <Button bordered success
+//           style={{fontSize: 25, color: 'green'}}
+//           styleDisabled={{color: 'red'}}
           onPress={() => this._handlePress()}>
           $5
-        </Button>        
-        <Button 
-          style={{fontSize: 25, color: 'green'}}
-          styleDisabled={{color: 'red'}}
+        </Button>   
+        
+        <Button bordered success
+//           style={{fontSize: 25, color: 'green'}}
           onPress={() => this._handlePress()}>
-          $5
-        </Button>        
-        <Button 
-          style={{fontSize: 25, color: 'green'}}
-          styleDisabled={{color: 'red'}}
+          $10
+        </Button>  
+        
+        <Button bordered success
+//           style={{fontSize: 25, color: 'green'}} 
           onPress={() => this._handlePress()}>
           $+
-        </Button>        
-        <Button style={{flex: 1, flexDirection: 'row'}}
-          style={{fontSize: 25, color: 'green'}}
-          styleDisabled={{color: 'red'}}
+        </Button> 
+        
+        <Button large bordered success
           onPress={() => this._handlePress()}>
           Tip!
         </Button>
+        
         <TouchableHighlight onPress={this.navigate.bind(this, "error")}>
           <Text>TO ERROR PAGE</Text>
         </TouchableHighlight>
+        
         <TouchableHighlight onPress={this.navigate.bind(this, "registration")}>
           <Text>Register</Text>
-        </TouchableHighlight>
+        </TouchableHighlight>         
+        
+        <TouchableHighlight onPress={this.navigate.bind(this, "active")}>
+          <Text>Active</Text>
+        </TouchableHighlight>  
+
+        
       </View>
     );
   }
@@ -120,5 +128,3 @@ const styles = StyleSheet.create({
 });
 
 export default Main
-
-// AppRegistry.registerComponent('Project', () => Project);

@@ -1,23 +1,33 @@
 import React, { Component } from 'react';
-import NavigationBar from 'react-native-navbar'
-import Button from 'react-native-button';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
-  TextInput,
   View,
-  SegmentedControlIOS,
-  Image,
-  Switch,
-  DatePickerIOS,
+  ListView,
   Navigator,
-} from 'react-native'
+  TouchableHighlight
+} from 'react-native';
+
+
 
 class Active extends Component {
-  
-  
+  navigate(routeName) {
+    this.props.navigator.push({
+      name: routeName
+    })
+  }
+
+  render() {
+    return (
+      <View>
+        <Text>
+          Sooooooooooooooooooooorry.
+        </Text>
+      </View>
+    );
+  }
 }
+
 
 
 

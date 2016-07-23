@@ -9,6 +9,12 @@ import {
 } from 'react-native';
 
 class Error extends Component {
+  navigate(routeName) {
+    this.props.navigator.push({
+      name: routeName
+      // passProps: {name: routeName},
+    })
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -41,12 +47,6 @@ class Error extends Component {
   }
 
 
-  navigate(routeName) {
-    this.props.navigator.push({
-      name: routeName
-      // passProps: {name: routeName},
-    })
-  }
 
 //   back(routeName, drink) {
 //     this.props.navigator.pop({
