@@ -26,7 +26,7 @@ class Error extends Component {
 
         <View style={styles.nav}>
         <TouchableHighlight underlayColor={'transparent'}
-          onPress={this.navigate.bind(this, 'main')}
+         onPress={()=>{this.props.navigator.pop()}}
         >
           <Text style={styles.bButton}>  &lsaquo; </Text>
         </TouchableHighlight>
