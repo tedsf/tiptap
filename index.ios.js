@@ -17,6 +17,7 @@ import Main from './main'
 import Error from './error'
 import Registration from './registration'
 import Active from './active'
+import Search from './search'
 
 class Project extends Component {
   render() {
@@ -37,6 +38,9 @@ class Project extends Component {
     }    
     if(route.name === 'active') {
       return <Active navigator={navigator} {...route.passProps} />
+    }    
+    if(route.name === 'search') {
+      return <Search navigator={navigator} {...route.passProps} />
     }
     if(route.name === 'registration') {
       return <Registration navigator={navigator} {...route.passProps} />
