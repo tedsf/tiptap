@@ -22,7 +22,7 @@ class Registration extends Component {
 
   render() {
     return (
-      <View style={{padding: 10}}>
+      <View style={{padding: 50}}>
         <TextInput
           style={{height: 30}}
           placeholder="Username"
