@@ -16,4 +16,4 @@ A mobile based payment system build with a decoupled React Native Front and Rail
 
 ##Schema
 
-<img src="images/schema.png">
+<img src="images/schema.png">[schema_sql.xml](images/schema_sql.xml)
