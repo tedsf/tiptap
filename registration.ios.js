@@ -15,9 +15,10 @@ import {
 } from 'react-native'
 
 class Registration extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {text: ''};
+  navigate(routeName) {
+    this.props.navigator.push({
+      name: routeName
+    });
   }
 
   render() {
@@ -37,7 +38,7 @@ class Registration extends Component {
         <Button 
           style={{fontSize: 25, color: 'green'}}
           styleDisabled={{color: 'red'}}
-          onPress={() => this._handlePress()}>
+          onPress={this.navigate.bind(this, "main")}>
           Submit Registration
         </Button> 
           
