@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import DeviceEventEmitter from 'react-native';
 import NavigationBar from 'react-native-navbar'
 import Button from 'react-native-button';
+import Beacons from 'react-native-ibeacon';
 import {
   AppRegistry,
   StyleSheet,
@@ -18,6 +20,29 @@ import Error from './error'
 import Registration from './registration'
 import Active from './active'
 import Search from './search'
+
+var region = {
+    identifier: 'Ted',
+    uuid: 'B0702880-A295-A8AB-F734-031A98A512DE',
+    major: 9,
+    minor: 41
+};
+
+Beacons.requestWhenInUseAuthorization();
+
+Beacons.startMonitoringForRegion(region);
+Beacons.startRangingBeaconsInRegion(region);
+
+Beacons.startUpdatingLocation();
+
+// var subscription = DeviceEventEmitter.addListener(
+//   'beaconsDidRange',
+//   function(data) {
+// //     data.region
+// //     data.region.identifier
+//     data.region.uuid
+//   }
+// );
 
 class Project extends Component {
   render() {
