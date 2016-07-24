@@ -7,7 +7,7 @@ import {
   Navigator,
   TouchableHighlight
 } from 'react-native';
-
+import NavigationBar from 'react-native-navbar'
 
 
 class Active extends Component {
@@ -20,6 +20,13 @@ class Active extends Component {
   render() {
     return (
       <View>
+          <NavigationBar 
+            title={{ title:  'TipTap!' , tintColor:  'black' , }}
+            rightButton={{ title: 'Get Tips', tintColor: 'black', handler: this.navigate.bind(this, "search")}}
+            leftButton={{ title: 'Back', tintColor: 'black', handler: this.navigate.bind(this, 'main')} }
+            style={{ backgroundColor:  "#D3D3D3" , }}
+            statusBar={{ tintColor:  "white"}}
+        />
         <Text>
           Sooooooooooooooooooooorry.
         </Text>
