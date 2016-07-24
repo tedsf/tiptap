@@ -11,6 +11,7 @@ import {
   SegmentedControlIOS,
   TouchableHighlight,
   Image,
+  ScrollView,
   Switch,
   DatePickerIOS,
   Navigator,
@@ -28,7 +29,7 @@ class Main extends Component {
   }
   render() {
     return (
-      <View>
+      <ScrollView>
         <NavigationBar
             title={{ title:  'TipTap!' , tintColor:  'black' , }}
             rightButton={{ title: 'Forward', tintColor: 'black' }}
@@ -45,7 +46,6 @@ class Main extends Component {
           tintColor={ "rgba(230,230,230,1)" }
           onTintColor={ "rgba(68,219,94,1)" }
         />
-        
         <Text style={styles.welcome}>
           Ted Day-Fratto
         </Text>
@@ -88,21 +88,18 @@ class Main extends Component {
           onPress={() => this._handlePress()}>
           Tip!
         </Button>
-        
-        <TouchableHighlight onPress={this.navigate.bind(this, "error")}>
-          <Text>TO ERROR PAGE</Text>
-        </TouchableHighlight>
-        
-        <TouchableHighlight onPress={this.navigate.bind(this, "registration")}>
-          <Text>Register</Text>
-        </TouchableHighlight>         
-        
+        <Text>{'\n'}{'\n'}</Text>
+        <Button large bordered success
+          onPress={this.navigate.bind(this, "registration")}>
+          Register
+        </Button>       
+        <Text>{'\n'}{'\n'}</Text>
         <TouchableHighlight onPress={this.navigate.bind(this, "active")}>
           <Text>Active</Text>
         </TouchableHighlight>  
 
         
-      </View>
+      </ScrollView>
     );
   }
 }
