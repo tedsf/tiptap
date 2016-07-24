@@ -94,11 +94,15 @@ class Main extends Component {
           Register
         </Button>       
         <Text>{'\n'}{'\n'}</Text>
-        <TouchableHighlight onPress={this.navigate.bind(this, "active")}>
-          <Text>Active</Text>
-        </TouchableHighlight>  
-
         
+        <Button large bordered success
+          onPress={this.navigate.bind(this, "search")}>
+          Search
+        </Button>   
+        <Button large bordered success
+          onPress={this.navigate.bind(this, "active")}>
+          Active
+        </Button>      
       </ScrollView>
     );
   }
