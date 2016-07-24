@@ -7,6 +7,7 @@ import {
   Navigator,
   TouchableHighlight
 } from 'react-native';
+import NavigationBar from 'react-native-navbar'
 
 class Search extends Component {
   navigate(routeName) {
@@ -18,18 +19,14 @@ class Search extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View>
-
-        <View style={styles.nav}>
-        <TouchableHighlight underlayColor={'transparent'}
-         onPress={()=>{this.props.navigator.pop()}}
-        >
-          <Text style={styles.bButton}>  &lsaquo; </Text>
-        </TouchableHighlight>
-
-          </View>
-          </View>
+      <View>
+        <NavigationBar
+            title={{ title:  'TipTap!' , tintColor:  'black' , }}
+            rightButton={{ title: 'Get Tips', tintColor: 'black', handler: this.navigate.bind(this, "search")}}
+            leftButton={{ title: 'Back', tintColor: 'black', handler: this.navigate.bind(this, "registration")} }
+            style={{ backgroundColor:  "#D3D3D3" , }}
+            statusBar={{ tintColor:  "white" , }}
+        />
           <Text style={styles.title}>
             Searching!
           </Text>
@@ -54,12 +51,10 @@ const styles = StyleSheet.create({
   bButton: {
     backgroundColor: '#007399',
     color: 'white',
-    // padding: 3,
     textAlign: 'left',
     marginTop: 0,
     fontSize: 40,
     width: 55,
-    // paddingBottom: 10,
     fontWeight: 'bold',
   },
   nav: {
@@ -67,7 +62,6 @@ const styles = StyleSheet.create({
     width: 378,
     height: 50,
     backgroundColor: '#007399',
-    // alignItems: 'center',
     flexDirection: 'row',
   },
   navtitle: {
@@ -87,12 +81,10 @@ const styles = StyleSheet.create({
   bButton: {
     backgroundColor: '#007399',
     color: 'white',
-    // padding: 3,
     textAlign: 'left',
     marginTop: 0,
     fontSize: 40,
     width: 55,
-    // paddingBottom: 10,
     fontWeight: 'bold',
   },
   nav: {
@@ -100,7 +92,6 @@ const styles = StyleSheet.create({
     width: 378,
     height: 50,
     backgroundColor: '#007399',
-    // alignItems: 'center',
     flexDirection: 'row',
   },
   navtitle: {
