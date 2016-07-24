@@ -24,8 +24,8 @@ import Search from './search'
 var region = {
     identifier: 'Ted',
     uuid: 'B0702880-A295-A8AB-F734-031A98A512DE',
-    major: 9,
-    minor: 41
+//     major: 9,
+//     minor: 41
 };
 
 Beacons.requestWhenInUseAuthorization();
@@ -39,6 +39,8 @@ var subscription = DeviceEventEmitter.addListener(
   'beaconsDidRange',
   (data) => {
     console.log(data);
+    console.log(data.beacons);
+//     console.log(data.beacons.first.minor)
     // data.region.identifier
     // data.region.uuid
 
