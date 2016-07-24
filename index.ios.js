@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DeviceEventEmitter from 'react-native';
+import { DeviceEventEmitter } from 'react-native';
 import NavigationBar from 'react-native-navbar'
 import Button from 'react-native-button';
 import Beacons from 'react-native-ibeacon';
@@ -35,14 +35,23 @@ Beacons.startRangingBeaconsInRegion(region);
 
 Beacons.startUpdatingLocation();
 
-// var subscription = DeviceEventEmitter.addListener(
-//   'beaconsDidRange',
-//   function(data) {
-// //     data.region
-// //     data.region.identifier
-//     data.region.uuid
-//   }
-// );
+var subscription = DeviceEventEmitter.addListener(
+  'beaconsDidRange',
+  (data) => {
+    console.log(data);
+    // data.region.identifier
+    // data.region.uuid
+
+    // data.beacons - Array of all beacons inside a region
+    //  in the following structure:
+    //    .uuid
+    //    .major - The major version of a beacon
+    //    .minor - The minor version of a beacon
+    //    .rssi - Signal strength: RSSI value (between -100 and 0)
+    //    .proximity - Proximity value, can either be "unknown", "far", "near" or "immediate"
+    //    .accuracy - The accuracy of a beacon
+  }
+);
 
 class Project extends Component {
   render() {
