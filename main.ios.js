@@ -24,9 +24,10 @@ import BeaconBroadcast from 'beaconbroadcast';
 
 
 class Main extends Component {
-   getInitialState() {
-      BeaconBroadcast.stopAdvertisingBeacon()
-    }
+    constructor(props) {
+    super(props);
+    this.state = BeaconBroadcast.stopAdvertisingBeacon();
+  }
       
   activate(){
       BeaconBroadcast.startAdvertisingBeaconWithString('dccd49ae-49d4-4c40-9595-56e8d3a12c95', 'pawl')
