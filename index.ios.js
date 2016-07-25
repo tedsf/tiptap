@@ -15,45 +15,51 @@ import {
   Navigator,
 } from 'react-native'
 
+import BeaconBroadcast from 'beaconbroadcast';
+
 import Main from './main'
 import Error from './error'
 import Registration from './registration'
 import Active from './active'
 import Search from './search'
 
-var region = {
-    identifier: 'Ted',
-    uuid: 'B0702880-A295-A8AB-F734-031A98A512DE',
-//     major: 9,
-//     minor: 41
-};
+// var Bleacon = require('bleacon');
 
-Beacons.requestWhenInUseAuthorization();
+// var region = {
+//     identifier: 'Ted',
+//     uuid: 'B0702880-A295-A8AB-F734-031A98A512DE',
+// //     major: 9,
+// //     minor: 41
+// };
 
-Beacons.startMonitoringForRegion(region);
-Beacons.startRangingBeaconsInRegion(region);
+// Beacons.requestWhenInUseAuthorization();
 
-Beacons.startUpdatingLocation();
+// Beacons.startMonitoringForRegion(region);
+// Beacons.startRangingBeaconsInRegion(region);
 
-var subscription = DeviceEventEmitter.addListener(
-  'beaconsDidRange',
-  (data) => {
-    console.log(data);
-    console.log(data.beacons);
-//     console.log(data.beacons.first.minor)
-    // data.region.identifier
-    // data.region.uuid
+// Beacons.startUpdatingLocation();
 
-    // data.beacons - Array of all beacons inside a region
-    //  in the following structure:
-    //    .uuid
-    //    .major - The major version of a beacon
-    //    .minor - The minor version of a beacon
-    //    .rssi - Signal strength: RSSI value (between -100 and 0)
-    //    .proximity - Proximity value, can either be "unknown", "far", "near" or "immediate"
-    //    .accuracy - The accuracy of a beacon
-  }
-);
+// var subscription = DeviceEventEmitter.addListener(
+//   'beaconsDidRange',
+//   (data) => {
+//     console.log(data);
+//     console.log(data.beacons);
+// //     console.log(data.beacons.first.minor)
+//     // data.region.identifier
+//     // data.region.uuid
+
+//     // data.beacons - Array of all beacons inside a region
+//     //  in the following structure:
+//     //    .uuid
+//     //    .major - The major version of a beacon
+//     //    .minor - The minor version of a beacon
+//     //    .rssi - Signal strength: RSSI value (between -100 and 0)
+//     //    .proximity - Proximity value, can either be "unknown", "far", "near" or "immediate"
+//     //    .accuracy - The accuracy of a beacon
+//   }
+// );
+
+
 
 class Project extends Component {
   render() {
