@@ -22,24 +22,25 @@ class Registration extends Component {
         name: routeName
       });
     }
-  
+
     constructor(props) {
       super(props);
-      this.state = { text: 'Teddy' };
+      this.state = {first_name: '', last_name: '', photo_url: '', payment_url: ''};
     }
-  
-      _onPressButtonPOST() {
-        fetch("https://tiptap-api.herokuapp.com/tippees", {
-          method: "POST", 
-          headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }, body: JSON.stringify({tippee: {first_name: "Ted", last_name: "Smith", payment_url: 'none'}})})
-        .then((response) => response.json())
-        .done();
+
+    _onPressButtonPOST() {
+      console.log(this.state)
+      fetch("https://tiptap-api.herokuapp.com/tippees", {
+        method: "POST",
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }, body: JSON.stringify({tippee: this.state})})
+      .then((response) => response.json())
+      .done();
     }
-  
-  render() { 
+
+  render() {
     return (
       <View>
       <NavigationBar
@@ -53,32 +54,30 @@ class Registration extends Component {
         <TextInput
           style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
           placeholder=" First Name"
-          ref="first_name"
-          onChangeText={(text) => this.setState({text})}
-          value={this.state.text}
+          onChangeText={(text) => this.setState({first_name: text})}
         />
         <TextInput
           style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
           placeholder=" Last Name"
-          onChangeText={(text) => this.setState({text})}
+          onChangeText={(text) => this.setState({last_name: text})}
          />
         <TextInput
            style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
            placeholder=" Photo URL"
-           onChangeText={(text) => this.setState({text})}
+           onChangeText={(text) => this.setState({photo_url: text})}
           />
-        <TextInput 
+        <TextInput
             style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1, marginBottom: 1}}
             placeholder=" Payment URL"
-            onChangeText={(text) => this.setState({text})}
+            onChangeText={(text) => this.setState({payment_url: text})}
         />
 
         <Button large success block
-          onPress={this._onPressButtonPOST}>
+          onPress={this._onPressButtonPOST()}>
           Submit Registration
           {/*onPress={this.navigate.bind(this, "main")}*/}
         </Button>
-        
+
       </View>
       </View>
     );
