@@ -31,6 +31,10 @@ class Main extends Component {
   activate(){
       BeaconBroadcast.startAdvertisingBeaconWithString('dccd49ae-49d4-4c40-9595-56e8d3a12c95', 'pawl')
   }  
+  
+  deactivate(){
+    BeaconBroadcast.stopAdvertisingBeacon()
+  }
 
     navigate(routeName) {
     this.props.navigator.push({
@@ -119,6 +123,10 @@ class Main extends Component {
         <Button large bordered success block
          onPress={() => this.activate()}>
           Activate
+        </Button> 
+        <Button large bordered success block
+        onPress={() => this.deactivate()}>
+          Deactivate
         </Button> 
         
         <Text>{'\n'}{'\n'}</Text>     
