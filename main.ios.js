@@ -35,7 +35,7 @@ class Main extends Component {
             rightButton={{ title: 'Get Tips', tintColor: 'black', handler: this.navigate.bind(this, "search")}}
             leftButton={{ title: 'Register', tintColor: 'black', handler: this.navigate.bind(this, "registration")} }
             style={{ backgroundColor:  "#D3D3D3" , }}
-            statusBar={{ tintColor:  "white" , }}
+            statusBar={{ tintColor:  "white", hideAnimation: 'none' }}
         />
         
         <Switch 
@@ -46,18 +46,34 @@ class Main extends Component {
           tintColor={ "rgba(230,230,230,1)" }
           onTintColor={ "rgba(68,219,94,1)" }
         />
-        <Text style={styles.welcome}>
-          Ted Day-Fratto
-        </Text>
         
-        <Image
-          style={{
-            width:  300 ,
-            height:  200 ,
-          }}
-          resizeMode={ "contain" }
-          source={{uri:'http://i.imgur.com/iuPt0UT.png'}}
-        />
+        {/*<Text>{'\n'}{'\n'}</Text>
+        <Text style={styles.welcome}> 
+          Nobody in your area is looking for tips!
+        </Text>
+        <View style={styles.container}>
+          <Image style={styles.image}
+            resizeMode={ "contain" }
+            source={{uri:'http://i.imgur.com/CGB5Uv9.png'}}
+            />
+        </View>*/}
+        
+        <View style={styles.container}>
+          <Text style={styles.welcome}>
+            Ted Day-Fratto
+          </Text>
+        
+          <Image 
+            style={{
+              width:  300 ,
+              height:  200 ,
+            }}
+            resizeMode={ "contain" }
+            source={{uri:'http://i.imgur.com/iuPt0UT.png'}}
+            />
+        </View>
+        
+        <Text>{'\n'}</Text>
         
         <Button bordered success block
 //           style={{fontSize: 25, color: 'green'}}
@@ -93,8 +109,6 @@ class Main extends Component {
           onPress={this.navigate.bind(this, "active")}>
           Active
         </Button>      
-        <Text>{'\n'}{'\n'}</Text>     
-        <Text>{'\n'}{'\n'}</Text>
       </ScrollView>
     );
   }
@@ -106,12 +120,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
+  },   
+  image: {
+    width:  150 ,
+    height:  100 ,
   },    
   instructions: {
     textAlign: 'center',
