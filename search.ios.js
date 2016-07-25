@@ -23,7 +23,7 @@ class Search extends Component {
         <NavigationBar
             title={{ title:  'TipTap!' , tintColor:  'black' , }}
             rightButton={{ title: 'Get Tips', tintColor: 'black', handler: this.navigate.bind(this, "search")}}
-            leftButton={{ title: 'Back', tintColor: 'black', handler: this.navigate.bind(this, "registration")} }
+            leftButton={{ title: 'Back', tintColor: 'black', handler: this.navigate.bind(this, "main")} }
             style={{ backgroundColor:  "#D3D3D3" , }}
             statusBar={{ tintColor:  "white" , }}
         />

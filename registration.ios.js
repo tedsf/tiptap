@@ -26,22 +26,34 @@ class Registration extends Component {
       <View style={{padding: 50}}>
         <TextInput
           style={{height: 30}}
-          placeholder="Username"
+          placeholder="First Name"
           onChangeText={(text) => this.setState({text})}
         />
-        <TextInput 
-          secureTextEntry={true}
+        <TextInput
           style={{height: 30}}
-          placeholder="Password"
+          placeholder="Last Name"
           onChangeText={(text) => this.setState({text})}
-         /> 
-        <Button 
+         />
+        <TextInput
+           secureTextEntry={true}
+           style={{height: 30}}
+           placeholder="Photo URL"
+           onChangeText={(text) => this.setState({text})}
+          />
+        <TextInput
+            secureTextEntry={true}
+            style={{height: 30}}
+            placeholder="Payment URL"
+            onChangeText={(text) => this.setState({text})}
+        />
+
+        <Button
           style={{fontSize: 25, color: 'green'}}
           styleDisabled={{color: 'red'}}
           onPress={this.navigate.bind(this, "main")}>
           Submit Registration
-        </Button> 
-          
+        </Button>
+
       </View>
     );
   }
@@ -58,7 +70,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  },    
+  },
   instructions: {
     textAlign: 'center',
     color: '#333333',
