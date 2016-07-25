@@ -32,8 +32,8 @@ class Main extends Component {
       <ScrollView>
         <NavigationBar
             title={{ title:  'TipTap!' , tintColor:  'black' , }}
-            rightButton={{ title: 'Forward', tintColor: 'black' }}
-            leftButton={{ title: 'Back', tintColor: 'black' }}
+            rightButton={{ title: 'Get Tips', tintColor: 'black', handler: this.navigate.bind(this, "search")}}
+            leftButton={{ title: 'Register', tintColor: 'black', handler: this.navigate.bind(this, "registration")} }
             style={{ backgroundColor:  "#D3D3D3" , }}
             statusBar={{ tintColor:  "white" , }}
         />
@@ -59,50 +59,42 @@ class Main extends Component {
           source={{uri:'http://i.imgur.com/iuPt0UT.png'}}
         />
         
-        <Button bordered success
+        <Button bordered success block
 //           style={{fontSize: 25, color: 'green'}}
           onPress={() => this._handlePress()}>
           $1
         </Button>  
-        
-        <Button bordered success
+
+        <Button bordered success block
 //           style={{fontSize: 25, color: 'green'}}
 //           styleDisabled={{color: 'red'}}
           onPress={() => this._handlePress()}>
           $5
         </Button>   
         
-        <Button bordered success
+        <Button bordered success block
 //           style={{fontSize: 25, color: 'green'}}
           onPress={() => this._handlePress()}>
           $10
         </Button>  
         
-        <Button bordered success
+        <Button bordered success block
 //           style={{fontSize: 25, color: 'green'}} 
           onPress={() => this._handlePress()}>
           $+
         </Button> 
         
-        <Button large bordered success
+        <Button large success block
           onPress={() => this._handlePress()}>
           Tip!
         </Button>
-        <Text>{'\n'}{'\n'}</Text>
-        <Button large bordered success
-          onPress={this.navigate.bind(this, "registration")}>
-          Register
-        </Button>       
-        <Text>{'\n'}{'\n'}</Text>
-        
-        <Button large bordered success
-          onPress={this.navigate.bind(this, "search")}>
-          Search
-        </Button>   
-        <Button large bordered success
+          
+        <Button large bordered success block
           onPress={this.navigate.bind(this, "active")}>
           Active
         </Button>      
+        <Text>{'\n'}{'\n'}</Text>     
+        <Text>{'\n'}{'\n'}</Text>
       </ScrollView>
     );
   }
