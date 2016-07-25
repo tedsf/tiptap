@@ -24,37 +24,44 @@ class Registration extends Component {
   render() {
     return (
       <View>
-        <NavigationBar
-            title={{ title:  'TipTap!' , tintColor:  'black' , }}
-            rightButton={{ title: 'Submit', tintColor: 'green', handler: this.navigate.bind(this, "main")}}
-            leftButton={{ title: 'Back', tintColor: 'black', handler: this.navigate.bind(this, "main")} }
-            style={{ backgroundColor:  "#D3D3D3" , }}
-            statusBar={{ tintColor:  "white" , }}
+      <NavigationBar
+          title={{ title:  'TipTap!' , tintColor:  'black' , }}
+          leftButton={{ title: 'Back', tintColor: 'black', handler: this.navigate.bind(this, "main")} }
+          style={{ backgroundColor:  "#D3D3D3" , }}
+          statusBar={{ tintColor:  "white" , }}
+      />
+
+      <View style={{padding: 50}}>
+        <TextInput
+          style={{height: 30}}
+          placeholder="First Name"
+          onChangeText={(text) => this.setState({text})}
         />
-        <View style={{padding: 50}}>
-          <TextInput
-            style={{height: 30}}
-            placeholder="First Name"
-            onChangeText={(text) => this.setState({text})}
+        <TextInput
+          style={{height: 30}}
+          placeholder="Last Name"
+          onChangeText={(text) => this.setState({text})}
+         />
+        <TextInput
+           secureTextEntry={true}
+           style={{height: 30}}
+           placeholder="Photo URL"
+           onChangeText={(text) => this.setState({text})}
           />
-          <TextInput
+        <TextInput
+            secureTextEntry={true}
             style={{height: 30}}
-            placeholder="Last Name"
+            placeholder="Payment URL"
             onChangeText={(text) => this.setState({text})}
-           />
-          <TextInput
-             secureTextEntry={true}
-             style={{height: 30}}
-             placeholder="Photo URL"
-             onChangeText={(text) => this.setState({text})}
-            />
-          <TextInput
-              secureTextEntry={true}
-              style={{height: 30}}
-              placeholder="Payment URL"
-              onChangeText={(text) => this.setState({text})}
-          />
-        </View>
+        />
+
+        <Button
+          style={{fontSize: 25, color: 'green'}}
+          styleDisabled={{color: 'red'}}
+          onPress={this.navigate.bind(this, "main")}>
+          Submit Registration
+        </Button>
+      </View>
       </View>
     );
   }
