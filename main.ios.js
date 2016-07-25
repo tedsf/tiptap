@@ -11,8 +11,8 @@ import {
   SegmentedControlIOS,
   TouchableHighlight,
   Image,
-  ScrollView,
   Switch,
+  ScrollView,
   DatePickerIOS,
   Navigator,
 } from 'react-native'
@@ -20,9 +20,19 @@ import {
 import Error from './error'
 import Registration from './registration'
 import Active from './active'
+import BeaconBroadcast from 'beaconbroadcast';
+
 
 class Main extends Component {
-  navigate(routeName) {
+   getInitialState() {
+      BeaconBroadcast.stopAdvertisingBeacon()
+    }
+      
+  activate(){
+      BeaconBroadcast.startAdvertisingBeaconWithString('dccd49ae-49d4-4c40-9595-56e8d3a12c95', 'pawl')
+  }  
+
+    navigate(routeName) {
     this.props.navigator.push({
       name: routeName
     });
@@ -45,6 +55,7 @@ class Main extends Component {
           }}
           tintColor={ "rgba(230,230,230,1)" }
           onTintColor={ "rgba(68,219,94,1)" }
+          
         />
         
         {/*<Text>{'\n'}{'\n'}</Text>
@@ -106,9 +117,12 @@ class Main extends Component {
         </Button>
           
         <Button large bordered success block
-          onPress={this.navigate.bind(this, "active")}>
-          Active
-        </Button>      
+         onPress={() => this.activate()}>
+          Activate
+        </Button> 
+        
+        <Text>{'\n'}{'\n'}</Text>     
+        <Text>{'\n'}{'\n'}</Text>
       </ScrollView>
     );
   }

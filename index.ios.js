@@ -15,6 +15,8 @@ import {
   Navigator,
 } from 'react-native'
 
+import BeaconBroadcast from 'beaconbroadcast';
+
 import Main from './main'
 import Error from './error'
 import Registration from './registration'
@@ -54,6 +56,8 @@ import Search from './search'
 //     //    .accuracy - The accuracy of a beacon
 //   }
 // );
+
+
 
 class Project extends Component {
   render() {
