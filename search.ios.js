@@ -5,7 +5,8 @@ import {
   View,
   ListView,
   Navigator,
-  TouchableHighlight
+  TouchableHighlight,
+  Image
 } from 'react-native';
 import NavigationBar from 'react-native-navbar'
 
@@ -22,14 +23,24 @@ class Search extends Component {
       <View>
         <NavigationBar
             title={{ title:  'TipTap!' , tintColor:  'black' , }}
-            rightButton={{ title: 'Get Tips', tintColor: 'black', handler: this.navigate.bind(this, "search")}}
-            leftButton={{ title: 'Back', tintColor: 'black', handler: this.navigate.bind(this, "registration")} }
+            leftButton={{ title: 'Off', tintColor: 'black', handler: this.navigate.bind(this, "main")} }
             style={{ backgroundColor:  "#D3D3D3" , }}
             statusBar={{ tintColor:  "white" , }}
         />
-          <Text style={styles.title}>
+        <View style={styles.container}>
+          <Text style={styles.welcome}>
             Searching!
           </Text>
+
+          <Image
+            style={{
+              width:  300 ,
+              height:  200 ,
+            }}
+            resizeMode={ "contain" }
+            source={{uri:'http://i.imgur.com/jVXo2FL.png'}}
+            />
+        </View>
       </View>
     );
   }
@@ -39,8 +50,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'stretch',
-    backgroundColor: '#B8D8D8',
+    backgroundColor: 'white',
     marginTop: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
   },
   title: {
     marginTop: 250,

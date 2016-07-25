@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import NavigationBar from 'react-native-navbar'
-import Button from 'react-native-button';
+import { Button } from 'native-base';
 import {
   AppRegistry,
   StyleSheet,
@@ -23,25 +23,41 @@ class Registration extends Component {
 
   render() {
     return (
+      <View>
+      <NavigationBar
+          title={{ title:  'TipTap!' , tintColor:  'black' , }}
+          leftButton={{ title: 'Back', tintColor: 'black', handler: this.navigate.bind(this, "main")} }
+          style={{ backgroundColor:  "#D3D3D3" , }}
+          statusBar={{ tintColor:  "white" , }}
+      />
+
       <View style={{padding: 50}}>
         <TextInput
-          style={{height: 30}}
-          placeholder="Username"
+          style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
+          placeholder=" First Name"
           onChangeText={(text) => this.setState({text})}
         />
-        <TextInput 
-          secureTextEntry={true}
-          style={{height: 30}}
-          placeholder="Password"
+        <TextInput
+          style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
+          placeholder=" Last Name"
           onChangeText={(text) => this.setState({text})}
-         /> 
-        <Button 
-          style={{fontSize: 25, color: 'green'}}
-          styleDisabled={{color: 'red'}}
+         />
+        <TextInput
+           style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
+           placeholder=" Photo URL"
+           onChangeText={(text) => this.setState({text})}
+          />
+        <TextInput
+            style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1, marginBottom: 1}}
+            placeholder=" Payment URL"
+            onChangeText={(text) => this.setState({text})}
+        />
+
+        <Button large success block
           onPress={this.navigate.bind(this, "main")}>
           Submit Registration
-        </Button> 
-          
+        </Button>
+      </View>
       </View>
     );
   }
@@ -58,7 +74,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  },    
+  },
   instructions: {
     textAlign: 'center',
     color: '#333333',
