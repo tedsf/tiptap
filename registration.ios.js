@@ -33,30 +33,28 @@ class Registration extends Component {
 
       <View style={{padding: 50}}>
         <TextInput
-          style={{height: 30}}
-          placeholder="First Name"
+          style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 3, padding: 3, marginTop: 1}}
+          placeholder=" First Name"
           onChangeText={(text) => this.setState({text})}
         />
         <TextInput
-          style={{height: 30}}
-          placeholder="Last Name"
+          style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 3, padding: 3, marginTop: 1}}
+          placeholder=" Last Name"
           onChangeText={(text) => this.setState({text})}
          />
         <TextInput
-           secureTextEntry={true}
-           style={{height: 30}}
-           placeholder="Photo URL"
+           style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 3, padding: 3, marginTop: 1}}
+           placeholder=" Photo URL"
            onChangeText={(text) => this.setState({text})}
           />
         <TextInput
-            secureTextEntry={true}
-            style={{height: 30}}
-            placeholder="Payment URL"
+            style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 3, padding: 3, marginTop: 1}}
+            placeholder=" Payment URL"
             onChangeText={(text) => this.setState({text})}
         />
 
         <Button
-          style={{fontSize: 25, color: 'green'}}
+          style={{fontSize: 25, color: 'green', borderColor: 'green', borderWidth: 7, borderRadius: 15, marginTop: 15, paddingTop: 15}}
           styleDisabled={{color: 'red'}}
           onPress={this.navigate.bind(this, "main")}>
           Submit Registration
