@@ -57,8 +57,6 @@ import Search from './search'
 //   }
 // );
 
-
-
 class Project extends Component {
   render() {
     return (
