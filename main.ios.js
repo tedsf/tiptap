@@ -28,9 +28,9 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
+      firstName: 'No users are in your area',
       lastName: '',
-      photoUrl: '',
+      photoUrl: 'http://i.imgur.com/CGB5Uv9.png',
       paymentUrl: ''
     }
   }
@@ -111,7 +111,7 @@ class Main extends Component {
               height:  200 ,
             }}
             resizeMode={ "contain" }
-            source={{uri:'http://i.imgur.com/iuPt0UT.png'}}
+            source={{uri:this.state.photoUrl}}
             />
         </View>
 

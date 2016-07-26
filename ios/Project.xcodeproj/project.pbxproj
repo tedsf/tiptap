@@ -401,7 +401,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 4R9WC9R4LZ;
+						DevelopmentTeam = S9DE3CW57L;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -699,7 +699,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.paulhaney.native.example.Project;
+				PRODUCT_BUNDLE_IDENTIFIER = org.tedsf.native.example.Project;
 				PRODUCT_NAME = Project;
 				PROVISIONING_PROFILE = "";
 			};
@@ -723,7 +723,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.paulhaney.native.example.Project;
+				PRODUCT_BUNDLE_IDENTIFIER = org.tedsf.native.example.Project;
 				PRODUCT_NAME = Project;
 				PROVISIONING_PROFILE = "";
 			};
