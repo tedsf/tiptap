@@ -2,7 +2,6 @@ import { Button } from 'native-base';
 
 import NavigationBar from 'react-native-navbar'
 import React, { Component } from 'react';
-// import Button from 'react-native-button';
 import {
   AppRegistry,
   StyleSheet,
@@ -15,7 +14,8 @@ import {
   ScrollView,
   DatePickerIOS,
   Navigator,
-  AlertIOS
+  AlertIOS,
+
 } from 'react-native'
 
 import Error from './error'
@@ -52,6 +52,7 @@ class Main extends Component {
     })
     .done();
   }
+  
 
   activate(){
       BeaconBroadcast.startAdvertisingBeaconWithString('b075ec89-2d25-4e38-8182-d5a07cea17a0', 'ben')
@@ -89,6 +90,9 @@ class Main extends Component {
           SEARCH
         </Button>
 
+        
+
+        
         {/*<Text>{'\n'}{'\n'}</Text>
         <Text style={styles.welcome}>
           Nobody in your area is looking for tips!
@@ -117,34 +121,25 @@ class Main extends Component {
 
         <Text>{'\n'}</Text>
 
-        <Button bordered success block
-//           style={{fontSize: 25, color: 'green'}}
-          onPress={() => this._handlePress()}>
+        <Button success block
+          onPress={() => (AlertIOS.alert(
+            "You tipped $1",
+            "Thanks!"))}>
           $1
         </Button>
 
-        <Button bordered success block
-//           style={{fontSize: 25, color: 'green'}}
-//           styleDisabled={{color: 'red'}}
-          onPress={() => this._handlePress()}>
+        <Button success block
+          onPress={() => (AlertIOS.alert(
+            "You tipped $5",
+            "Thanks!"))}>
           $5
         </Button>
 
-        <Button bordered success block
-//           style={{fontSize: 25, color: 'green'}}
-          onPress={() => this._handlePress()}>
+        <Button success block
+          onPress={() => (AlertIOS.alert(
+            "You tipped $10",
+            "Thanks!"))}>
           $10
-        </Button>
-
-        <Button bordered success block
-//           style={{fontSize: 25, color: 'green'}}
-          onPress={() => this._handlePress()}>
-          $+
-        </Button>
-
-        <Button large success block
-          onPress={() => this._handlePress()}>
-          Tip!
         </Button>
 
         <Button large bordered success block
