@@ -32,7 +32,8 @@ class Main extends Component {
       firstName: 'No users are in your area',
       lastName: '',
       photoUrl: 'http://i.imgur.com/CGB5Uv9.png',
-      paymentUrl: ''
+      paymentUrl: '',
+      modalVisible: false
     }
   }
 
@@ -131,7 +132,7 @@ class Main extends Component {
          <Modal
            animated={ true }
            transparent={ false }
-           visible={(this.state && this.state.modalVisible) || false }>
+           visible={(this.state && this.state.modalVisible)}>
            <View
              style={{
                flex: 1,
@@ -140,15 +141,22 @@ class Main extends Component {
                justifyContent: 'center',
                padding: 20,
              }}>
-             <Text>Hello Modal</Text>
-             {/*}<Image
-             source={{uri:'https://developer.apple.com/library/safari/documentation/UserExperience/Conceptual/MobileHIG/Art/apple_pay_payment_sheet_2x.png'}}/>*/}
+             <Text onPress={
+               () => {
+                this.setState({modalVisible: false});
+                (AlertIOS.alert(
+                  "You tipped $1",
+                  "Thanks!"));
+             }}>
+           Hello Modal</Text>
+             <Image
+             source={{uri:'https://developer.apple.com/library/safari/documentation/UserExperience/Conceptual/MobileHIG/Art/apple_pay_payment_sheet_2x.png'}}
+             />
            </View>
          </Modal>
        </View>
 
-        <Button success block
-          onPress={() => this._onPressModal.bind(this)}>
+        <Button success block onPress={() => this.setState({modalVisible: true}) }>
           $1
         </Button>
 
