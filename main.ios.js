@@ -74,10 +74,8 @@ class Main extends Component {
           tintColor={ "rgba(230,230,230,1)" }
           onTintColor={ "rgba(68,219,94,1)" }
         />
-        <Button bordered success block>
-          <TouchableHighlight onPress={this._onPressButtonGET} style={styles.button}>
-            <Text>SEARCH</Text>
-          </TouchableHighlight>
+        <Button bordered success block onPress={this._onPressButtonGET} style={styles.button}>
+            SEARCH
         </Button>
 
         {/*<Text>{'\n'}{'\n'}</Text>

@@ -23,25 +23,26 @@ import Registration from './registration'
 import Active from './active'
 import Search from './search'
 
-// var region = {
-//     identifier: 'Ted',
-//     uuid: 'B0702880-A295-A8AB-F734-031A98A512DE',
-// //     major: 9,
-// //     minor: 41
-// };
+var region = {
+    identifier: 'Ted',
+    uuid: 'B0702880-A295-A8AB-F734-031A98A512DE',
+//     major: 9,
+//     minor: 41
+};
 
-// Beacons.requestWhenInUseAuthorization();
+Beacons.requestWhenInUseAuthorization();
 
-// Beacons.startMonitoringForRegion(region);
-// Beacons.startRangingBeaconsInRegion(region);
+Beacons.startMonitoringForRegion(region);
+Beacons.startRangingBeaconsInRegion(region);
 
-// Beacons.startUpdatingLocation();
+Beacons.startUpdatingLocation();
 
-// var subscription = DeviceEventEmitter.addListener(
-//   'beaconsDidRange',
-//   (data) => {
-//     console.log(data);
-//     console.log(data.beacons);
+var subscription = DeviceEventEmitter.addListener(
+  'beaconsDidRange',
+  (data) => {
+
+    console.log(data.beacons);
+    console.log(data.beacons[0].uuid);
 // //     console.log(data.beacons.first.minor)
 //     // data.region.identifier
 //     // data.region.uuid
@@ -54,8 +55,8 @@ import Search from './search'
 //     //    .rssi - Signal strength: RSSI value (between -100 and 0)
 //     //    .proximity - Proximity value, can either be "unknown", "far", "near" or "immediate"
 //     //    .accuracy - The accuracy of a beacon
-//   }
-// );
+  }
+);
 
 class Project extends Component {
   render() {
