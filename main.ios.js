@@ -34,10 +34,15 @@ class Main extends Component {
     fetch("https://tiptap-api.herokuapp.com/tippees", {method: "GET"})
     .then((response) => response.json())
     .then((responseData) => {
-        AlertIOS.alert(
-            "GET Response",
-            "Search Query -> " + responseData[0].first_name
-        )
+      var first_name = responseData[0].first_name
+      var last_name = responseData[0].last_name
+      var payment_url = responseData[0].payment_url
+      var image_url = responseData[0].image_url
+
+        // AlertIOS.alert(
+        //     "GET Response",
+        //     "Search Query -> " + first_name + " " + last_name
+        // )
     })
     .done();
   }
@@ -74,10 +79,8 @@ class Main extends Component {
           tintColor={ "rgba(230,230,230,1)" }
           onTintColor={ "rgba(68,219,94,1)" }
         />
-        <Button bordered success block>
-          <TouchableHighlight onPress={this._onPressButtonGET} style={styles.button}>
-            <Text>SEARCH</Text>
-          </TouchableHighlight>
+        <Button bordered success block onPress={this._onPressButtonGET} style={styles.button}>
+          SEARCH
         </Button>
 
         {/*<Text>{'\n'}{'\n'}</Text>
@@ -93,7 +96,7 @@ class Main extends Component {
 
         <View style={styles.container}>
           <Text style={styles.welcome}>
-            Ted Day-Fratto
+           Ted
           </Text>
 
           <Image
