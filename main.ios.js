@@ -131,7 +131,7 @@ class Main extends Component {
         <View>
          <Modal
            animated={ true }
-           transparent={ false }
+           transparent={ true }
            visible={(this.state && this.state.modalVisible)}>
            <View
              style={{
@@ -141,17 +141,20 @@ class Main extends Component {
                justifyContent: 'center',
                padding: 20,
              }}>
-             <Text onPress={
-               () => {
-                this.setState({modalVisible: false});
-                (AlertIOS.alert(
-                  "You tipped $1",
-                  "Thanks!"));
-             }}>
-           Hello Modal</Text>
-             <Image
-             source={{uri:'https://developer.apple.com/library/safari/documentation/UserExperience/Conceptual/MobileHIG/Art/apple_pay_payment_sheet_2x.png'}}
-             />
+             {/*}<Text>
+           Hello Modal</Text>*/}
+            <TouchableHighlight onPress={
+              () => {
+               this.setState({modalVisible: false});
+               (AlertIOS.alert(
+                 "You tipped $1",
+                 "Thanks!"));
+            }}>
+               <Image
+               source={{uri:'https://developer.apple.com/library/safari/documentation/UserExperience/Conceptual/MobileHIG/Art/apple_pay_payment_sheet_2x.png'}}
+               style={{width: 250, height:400}}
+               />
+             </TouchableHighlight>
            </View>
          </Modal>
        </View>
