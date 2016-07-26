@@ -23,11 +23,12 @@ import Registration from './registration'
 import Active from './active'
 import Search from './search'
 
+
 var region = {
     identifier: 'Ted',
     uuid: 'B0702880-A295-A8AB-F734-031A98A512DE',
-//     major: 9,
-//     minor: 41
+    major: 9,
+    minor: 41
 };
 
 Beacons.requestWhenInUseAuthorization();
@@ -36,6 +37,7 @@ Beacons.startMonitoringForRegion(region);
 Beacons.startRangingBeaconsInRegion(region);
 
 Beacons.startUpdatingLocation();
+
 
 var subscription = DeviceEventEmitter.addListener(
   'beaconsDidRange',
