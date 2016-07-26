@@ -15,6 +15,7 @@ import {
   ScrollView,
   DatePickerIOS,
   Navigator,
+  AlertIOS
 } from 'react-native'
 
 import Error from './error'
@@ -24,15 +25,27 @@ import BeaconBroadcast from 'beaconbroadcast';
 
 
 class Main extends Component {
-    constructor(props) {
+  constructor(props) {
     super(props);
     this.state = BeaconBroadcast.stopAdvertisingBeacon();
   }
-      
+
+  _onPressButtonGET() {
+    fetch("https://tiptap-api.herokuapp.com/tippees", {method: "GET"})
+    .then((response) => response.json())
+    .then((responseData) => {
+        AlertIOS.alert(
+            "GET Response",
+            "Search Query -> " + responseData[0].first_name
+        )
+    })
+    .done();
+  }
+
   activate(){
-      BeaconBroadcast.startAdvertisingBeaconWithString('dccd49ae-49d4-4c40-9595-56e8d3a12c95', 'pawl')
-  }  
-  
+      BeaconBroadcast.startAdvertisingBeaconWithString('b075ec89-2d25-4e38-8182-d5a07cea17a0', 'ben')
+  }
+
   deactivate(){
     BeaconBroadcast.stopAdvertisingBeacon()
   }
@@ -52,19 +65,23 @@ class Main extends Component {
             style={{ backgroundColor:  "#D3D3D3" , }}
             statusBar={{ tintColor:  "white", hideAnimation: 'none' }}
         />
-        
-        <Switch 
+
+        <Switch
           value={(this.state && this.state.switchValue) || false}
           onValueChange={(value) => {
             this.setState({switchValue: value})
           }}
           tintColor={ "rgba(230,230,230,1)" }
           onTintColor={ "rgba(68,219,94,1)" }
-          
         />
-        
+        <Button bordered success block>
+          <TouchableHighlight onPress={this._onPressButtonGET} style={styles.button}>
+            <Text>SEARCH</Text>
+          </TouchableHighlight>
+        </Button>
+
         {/*<Text>{'\n'}{'\n'}</Text>
-        <Text style={styles.welcome}> 
+        <Text style={styles.welcome}>
           Nobody in your area is looking for tips!
         </Text>
         <View style={styles.container}>
@@ -73,13 +90,13 @@ class Main extends Component {
             source={{uri:'http://i.imgur.com/CGB5Uv9.png'}}
             />
         </View>*/}
-        
+
         <View style={styles.container}>
           <Text style={styles.welcome}>
             Ted Day-Fratto
           </Text>
-        
-          <Image 
+
+          <Image
             style={{
               width:  300 ,
               height:  200 ,
@@ -88,49 +105,49 @@ class Main extends Component {
             source={{uri:'http://i.imgur.com/iuPt0UT.png'}}
             />
         </View>
-        
+
         <Text>{'\n'}</Text>
-        
+
         <Button bordered success block
 //           style={{fontSize: 25, color: 'green'}}
           onPress={() => this._handlePress()}>
           $1
-        </Button>  
+        </Button>
 
         <Button bordered success block
 //           style={{fontSize: 25, color: 'green'}}
 //           styleDisabled={{color: 'red'}}
           onPress={() => this._handlePress()}>
           $5
-        </Button>   
-        
+        </Button>
+
         <Button bordered success block
 //           style={{fontSize: 25, color: 'green'}}
           onPress={() => this._handlePress()}>
           $10
-        </Button>  
-        
+        </Button>
+
         <Button bordered success block
-//           style={{fontSize: 25, color: 'green'}} 
+//           style={{fontSize: 25, color: 'green'}}
           onPress={() => this._handlePress()}>
           $+
-        </Button> 
-        
+        </Button>
+
         <Button large success block
           onPress={() => this._handlePress()}>
           Tip!
         </Button>
-          
+
         <Button large bordered success block
          onPress={() => this.activate()}>
           Activate
-        </Button> 
+        </Button>
         <Button large bordered success block
         onPress={() => this.deactivate()}>
           Deactivate
-        </Button> 
-        
-        <Text>{'\n'}{'\n'}</Text>     
+        </Button>
+
+        <Text>{'\n'}{'\n'}</Text>
         <Text>{'\n'}{'\n'}</Text>
       </ScrollView>
     );
@@ -148,11 +165,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  },   
+  },
   image: {
     width:  150 ,
     height:  100 ,
-  },    
+  },
   instructions: {
     textAlign: 'center',
     color: '#333333',
