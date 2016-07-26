@@ -42,7 +42,7 @@ var subscription = DeviceEventEmitter.addListener(
   (data) => {
 
     console.log(data.beacons);
-    console.log(data.beacons[0].uuid);
+//     console.log(data.beacons[0].uuid);
 // //     console.log(data.beacons.first.minor)
 //     // data.region.identifier
 //     // data.region.uuid

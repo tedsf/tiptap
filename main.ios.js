@@ -27,7 +27,7 @@ import BeaconBroadcast from 'beaconbroadcast';
 class Main extends Component {
   constructor(props) {
     super(props);
-    this.state = BeaconBroadcast.stopAdvertisingBeacon();
+    this.state = {first_name:"", last_name: "", payment_url: "", photo_url: ""};
   }
 
   _onPressButtonGET() {
@@ -37,7 +37,7 @@ class Main extends Component {
       var first_name = responseData[0].first_name
       var last_name = responseData[0].last_name
       var payment_url = responseData[0].payment_url
-      var image_url = responseData[0].image_url
+      var photo_url = responseData[0].photo_url
 
         // AlertIOS.alert(
         //     "GET Response",
@@ -95,9 +95,7 @@ class Main extends Component {
         </View>*/}
 
         <View style={styles.container}>
-          <Text style={styles.welcome}>
-           Ted
-          </Text>
+          
 
           <Image
             style={{
