@@ -71,16 +71,19 @@ class Registration extends Component {
   }
 
   registerTippee() {
+    var that = this
     fetch("https://tiptap-api.herokuapp.com/tippees", {
       method: "POST",
       headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    }, body: JSON.stringify({tippee: this.state})})
+    }, body: JSON.stringify({tippee: that.state})})
     .then((response) => response.json())
+    .then(that.navigate("main"))
     .done();
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
