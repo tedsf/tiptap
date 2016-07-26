@@ -27,17 +27,23 @@ import BeaconBroadcast from 'beaconbroadcast';
 class Main extends Component {
   constructor(props) {
     super(props);
-    this.state = {first_name:"", last_name: "", payment_url: "", photo_url: ""};
+    this.state = {
+      firstName: '',
+      lastName: '',
+      photoUrl: '',
+      paymentUrl: ''
+    }
   }
 
   _onPressButtonGET() {
+    var that = this;
     fetch("https://tiptap-api.herokuapp.com/tippees", {method: "GET"})
     .then((response) => response.json())
     .then((responseData) => {
-      var first_name = responseData[0].first_name
-      var last_name = responseData[0].last_name
-      var payment_url = responseData[0].payment_url
-      var photo_url = responseData[0].photo_url
+      that.setState({firstName: responseData[0].first_name})
+      that.setState({lastName: responseData[0].last_name})
+      that.setState({paymentUrl: responseData[0].payment_url})
+      that.setState({photoUrl: responseData[0].photo_url})
 
         // AlertIOS.alert(
         //     "GET Response",
@@ -79,7 +85,7 @@ class Main extends Component {
           tintColor={ "rgba(230,230,230,1)" }
           onTintColor={ "rgba(68,219,94,1)" }
         />
-        <Button bordered success block onPress={this._onPressButtonGET} style={styles.button}>
+        <Button bordered success block onPress={this._onPressButtonGET.bind(this)} style={styles.button}>
           SEARCH
         </Button>
 
@@ -95,7 +101,9 @@ class Main extends Component {
         </View>*/}
 
         <View style={styles.container}>
-          
+          <Text style={styles.welcome}>
+           {this.state.firstName} {this.state.lastName}
+          </Text>
 
           <Image
             style={{
