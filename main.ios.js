@@ -15,6 +15,7 @@ import {
   DatePickerIOS,
   Navigator,
   AlertIOS,
+  Modal,
 
 } from 'react-native'
 
@@ -52,7 +53,12 @@ class Main extends Component {
     })
     .done();
   }
-  
+
+  _onPressModal(){
+    var that = this;
+    that.setState({visible: true})
+  }
+
 
   activate(){
       BeaconBroadcast.startAdvertisingBeaconWithString('b075ec89-2d25-4e38-8182-d5a07cea17a0', 'ben')
@@ -90,9 +96,9 @@ class Main extends Component {
           SEARCH
         </Button>
 
-        
 
-        
+
+
         {/*<Text>{'\n'}{'\n'}</Text>
         <Text style={styles.welcome}>
           Nobody in your area is looking for tips!
@@ -121,10 +127,28 @@ class Main extends Component {
 
         <Text>{'\n'}</Text>
 
+        <View>
+         <Modal
+           animated={ true }
+           transparent={ false }
+           visible={(this.state && this.state.modalVisible) || false }>
+           <View
+             style={{
+               flex: 1,
+               backgroundColor: '#f5fcff',
+               alignItems: 'center',
+               justifyContent: 'center',
+               padding: 20,
+             }}>
+             <Text>Hello Modal</Text>
+             {/*}<Image
+             source={{uri:'https://developer.apple.com/library/safari/documentation/UserExperience/Conceptual/MobileHIG/Art/apple_pay_payment_sheet_2x.png'}}/>*/}
+           </View>
+         </Modal>
+       </View>
+
         <Button success block
-          onPress={() => (AlertIOS.alert(
-            "You tipped $1",
-            "Thanks!"))}>
+          onPress={() => this._onPressModal.bind(this)}>
           $1
         </Button>
 
