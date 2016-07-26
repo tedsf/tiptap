@@ -61,9 +61,8 @@ class Registration extends Component {
           />
 
           <Button large success block
-            onPress={this.registerTippee()}>
+            onPress={this.registerTippee.bind(this)}>
             Submit Registration
-            {/*onPress={this.navigate.bind(this, "main")}*/}
           </Button>
 
         </View>
@@ -72,7 +71,6 @@ class Registration extends Component {
   }
 
   registerTippee() {
-    console.log(this.state)
     fetch("https://tiptap-api.herokuapp.com/tippees", {
       method: "POST",
       headers: {
