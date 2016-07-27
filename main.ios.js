@@ -17,8 +17,8 @@ import {
   AsyncStorage,
   DeviceEventEmitter,
 } from 'react-native'
+
 import React, { Component } from 'react';
-import Error from './error'
 import Registration from './registration'
 import Active from './active'
 import BeaconBroadcast from 'beaconbroadcast';
@@ -156,17 +156,19 @@ class Main extends Component {
          </Modal>
        </View>
 
-        <Button success block onPress={() => this.setState({modalVisible: true}) }>
-          $1
-        </Button>
-
-        <Button success block onPress={() => this.setState({modalVisible: true})}>
-          $5
-        </Button>
-
-        <Button success block onPress={() => this.setState({modalVisible: true})}>
-          $10
-        </Button>
+        {(this.state.lastName) ? (
+          <View>
+            <Button success block onPress={() => this.setState({modalVisible: true})}>
+              $1
+            </Button>
+            <Button success block onPress={() => this.setState({modalVisible: true})}>
+              $5
+            </Button>
+            <Button success block onPress={() => this.setState({modalVisible: true})}>
+              $10
+            </Button>
+          </View>
+        ): null }
 
         {(this.state.beacons && this.state.beacons.length > 0) ? (
           <View>
