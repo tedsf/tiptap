@@ -64,7 +64,12 @@ class Main extends Component {
   }
 
   activate(){
-    BeaconBroadcast.startAdvertisingBeaconWithString('b075ec89-2d25-4e38-8182-d5a07cea17a0', 'ben')
+    AsyncStorage.getItem(
+      'beacons',
+      // TODO:  BeaconBroadcast does not support configuration of a beacon's major and minor values.  They have been hard-coded in node_modules/beaconbroadcast/BeaconBroadcast.m to major:0, minor:1.  The system needs to broadcast the major and minor values stored in beacons.
+      // TODO:  This app is currently hard to support the first beacon in the beacons array only.
+      (error, result) => BeaconBroadcast.startAdvertisingBeaconWithString(JSON.parse(result)[0].uuid, 'TipTap')
+    )
   }
 
   deactivate(){
