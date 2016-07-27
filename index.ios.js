@@ -12,6 +12,7 @@ import {
   Switch,
   DatePickerIOS,
   Navigator,
+  AsyncStorage,
 } from 'react-native'
 
 import Main from './main'
