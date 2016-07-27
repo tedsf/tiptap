@@ -29,17 +29,17 @@ class Project extends Component {
       />
     );
   }
-  
+
   renderScene(route, navigator) {
     if(route.name === 'main') {
       return <Main navigator={navigator} {...route.passProps} />
     }
     if(route.name === 'error') {
       return <Error navigator={navigator} {...route.passProps} />
-    }    
+    }
     if(route.name === 'active') {
       return <Active navigator={navigator} {...route.passProps} />
-    }    
+    }
     if(route.name === 'search') {
       return <Search navigator={navigator} {...route.passProps} />
     }
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  },    
+  },
   instructions: {
     textAlign: 'center',
     color: '#333333',

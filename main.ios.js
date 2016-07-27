@@ -1,8 +1,19 @@
 import { Button } from 'native-base';
 import NavigationBar from 'react-native-navbar'
 import {
-  AppRegistry, StyleSheet, Text, View, SegmentedControlIOS, TouchableHighlight,
-  Image, Switch, ScrollView, DatePickerIOS, Navigator, AlertIOS,
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View,
+  SegmentedControlIOS,
+  TouchableHighlight,
+  Image,
+  Switch,
+  ScrollView,
+  DatePickerIOS,
+  Navigator,
+  AlertIOS,
+  Modal,
 } from 'react-native'
 import React, { Component } from 'react';
 import Error from './error'
@@ -29,7 +40,8 @@ class Main extends Component {
       firstName: 'No users are in your area',
       lastName: '',
       photoUrl: 'http://i.imgur.com/CGB5Uv9.png',
-      paymentUrl: ''
+      paymentUrl: '',
+      modalVisible: false
     }
   }
 
@@ -63,7 +75,7 @@ class Main extends Component {
       name: routeName
     });
   }
-  
+
   render() {
     return (
       <ScrollView>
@@ -75,8 +87,9 @@ class Main extends Component {
             statusBar={{ tintColor:  "white", hideAnimation: 'none' }}
         />
 
+
         <View style={styles.container}>
-          
+
           <Text style={styles.welcome}>
             {this.state.firstName} {this.state.lastName}
           </Text>
@@ -93,24 +106,47 @@ class Main extends Component {
 
         <Text>{'\n'}</Text>
 
-        <Button success block
-          onPress={() => (AlertIOS.alert(
-            "You tipped $1",
-            "Thanks!"))}>
+        <View>
+         <Modal
+           animated={ true }
+           transparent={ true }
+           visible={(this.state && this.state.modalVisible)}>
+           <View
+             style={{
+               flex: 1,
+               backgroundColor: '#f5fcff',
+               alignItems: 'center',
+               justifyContent: 'center',
+               padding: 20,
+             }}>
+             {/*}<Text>
+           Hello Modal</Text>*/}
+            <TouchableHighlight onPress={
+              () => {
+               this.setState({modalVisible: false});
+               (AlertIOS.alert(
+                 "Thanks for your tip!",
+               "- Team TipTap"
+                ));
+            }}>
+               <Image
+               source={{uri:'https://developer.apple.com/library/safari/documentation/UserExperience/Conceptual/MobileHIG/Art/apple_pay_payment_sheet_2x.png'}}
+               style={{width: 315, height:385}}
+               />
+             </TouchableHighlight>
+           </View>
+         </Modal>
+       </View>
+
+        <Button success block onPress={() => this.setState({modalVisible: true}) }>
           $1
         </Button>
 
-        <Button success block
-          onPress={() => (AlertIOS.alert(
-            "You tipped $5",
-            "Thanks!"))}>
+        <Button success block onPress={() => this.setState({modalVisible: true})}>
           $5
         </Button>
 
-        <Button success block
-          onPress={() => (AlertIOS.alert(
-            "You tipped $10",
-            "Thanks!"))}>
+        <Button success block onPress={() => this.setState({modalVisible: true})}>
           $10
         </Button>
 
@@ -118,12 +154,12 @@ class Main extends Component {
           onPress={() => this.activate()}>
           Activate
         </Button>
-        
+
         <Button large bordered success block
           onPress={() => this.deactivate()}>
           Deactivate
         </Button>
-        
+
         <Text>{'\n'}{'\n'}</Text>
       </ScrollView>
     );
