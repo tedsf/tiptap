@@ -38,6 +38,7 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      tippeeId: '',
       firstName: 'No users are in your area',
       lastName: '',
       photoUrl: 'http://i.imgur.com/CGB5Uv9.png',
@@ -57,6 +58,7 @@ class Main extends Component {
           fetch("https://tiptap-api.herokuapp.com/tippees/" + data.beacons[0].minor, {method: "GET"})
           .then((response) => response.json())
           .then((responseData) => {
+            this.setState({tippeeId: responseData.id})
             this.setState({firstName: responseData.first_name})
             this.setState({lastName: responseData.last_name})
             this.setState({photoUrl: responseData.photo_url})
@@ -79,7 +81,20 @@ class Main extends Component {
       }
     )
   }
-
+  
+  // when you integrate payments this needs to be downstream of apple confirmation
+  
+    onTip(num) {
+        fetch("https://tiptap-api.herokuapp.com/tips", {
+          method: "POST", 
+          headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }, body: JSON.stringify({tip: {amount: num, tippee_id: this.state.tippeeId, processed: true}})})
+        .then((response) => response.json())
+        .done();
+    }
+  
   activate(){
     // TODO:  BeaconBroadcast does not support configuration of a beacon's major and minor values.  They have been hard-coded in node_modules/beaconbroadcast/BeaconBroadcast.m to major:0, minor:1.  The system needs to broadcast the major and minor values stored in beacons.
     // TODO:  This app is currently hard coded to support the first beacon in the beacons array only.
@@ -158,18 +173,27 @@ class Main extends Component {
 
         {(this.state.lastName) ? (
           <View>
-            <Button success block onPress={() => this.setState({modalVisible: true})}>
+            <Button success block onPress={() => {
+                this.setState({modalVisible: true})
+                this.onTip(1)
+              }}>
               $1
             </Button>
-            <Button success block onPress={() => this.setState({modalVisible: true})}>
+            <Button success block onPress={() => {
+                this.setState({modalVisible: true})
+                this.onTip(5)
+              }}>
               $5
             </Button>
-            <Button success block onPress={() => this.setState({modalVisible: true})}>
+            <Button success block onPress={() => {
+                this.setState({modalVisible: true})
+                this.onTip(10)
+              }}>
               $10
             </Button>
           </View>
         ): null }
-
+        
         {(this.state.beacons && this.state.beacons.length > 0) ? (
           <View>
             <Button large bordered success block
