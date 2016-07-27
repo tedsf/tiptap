@@ -38,6 +38,7 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      tippeeId: '',
       firstName: 'No users are in your area',
       lastName: '',
       photoUrl: 'http://i.imgur.com/CGB5Uv9.png',
@@ -57,6 +58,7 @@ class Main extends Component {
           fetch("https://tiptap-api.herokuapp.com/tippees/" + data.beacons[0].minor, {method: "GET"})
           .then((response) => response.json())
           .then((responseData) => {
+            this.setState({tippeeId: responseData.id})
             this.setState({firstName: responseData.first_name})
             this.setState({lastName: responseData.last_name})
             this.setState({photoUrl: responseData.photo_url})
@@ -81,6 +83,18 @@ class Main extends Component {
         this.setState({beacons: JSON.parse(result)})
       }
     )
+  }
+
+  onTip(num) {
+    // TODO: This function should be called upon confirmation of a successful payment.  It is currently called too soon.
+    fetch("https://tiptap-api.herokuapp.com/tips", {
+      method: "POST",
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }, body: JSON.stringify({tip: {amount: num, tippee_id: this.state.tippeeId, processed: true}})})
+    .then((response) => response.json())
+    .done();
   }
 
   navigate(routeName) {
@@ -152,13 +166,22 @@ class Main extends Component {
 
         {(this.state.lastName) ? (
           <View>
-            <Button success block onPress={() => this.setState({modalVisible: true})}>
+            <Button success block onPress={() => {
+                this.setState({modalVisible: true})
+                this.onTip(1)
+              }}>
               $1
             </Button>
-            <Button success block onPress={() => this.setState({modalVisible: true})}>
+            <Button success block onPress={() => {
+                this.setState({modalVisible: true})
+                this.onTip(5)
+              }}>
               $5
             </Button>
-            <Button success block onPress={() => this.setState({modalVisible: true})}>
+            <Button success block onPress={() => {
+                this.setState({modalVisible: true})
+                this.onTip(10)
+              }}>
               $10
             </Button>
           </View>

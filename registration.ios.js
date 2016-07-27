@@ -7,6 +7,9 @@ import {
   Text,
   TextInput,
   View,
+  ScrollView,
+  ReactNative,
+  findNodeHandle,
   SegmentedControlIOS,
   Image,
   Switch,
@@ -29,6 +32,17 @@ class Registration extends Component {
     });
   }
 
+  inputFocused(refName) {
+    setTimeout(() => {
+      let scrollResponder = this.refs.scrollView.getScrollResponder();
+      scrollResponder.scrollResponderScrollNativeHandleToKeyboard(
+        findNodeHandle(this.refs[refName]),
+        110, //additionalOffset
+        true
+      );
+    }, 50);
+  }
+
   render() {
     return (
       <View>
@@ -39,34 +53,50 @@ class Registration extends Component {
             statusBar={{ tintColor:  "white" , }}
         />
 
-        <View style={{padding: 50}}>
-          <TextInput
-            style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
-            placeholder=" First Name"
-            onChangeText={(text) => this.setState({first_name: text})}
-          />
-          <TextInput
-            style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
-            placeholder=" Last Name"
-            onChangeText={(text) => this.setState({last_name: text})}
-           />
-          <TextInput
-             style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
-             placeholder=" Photo URL"
-             onChangeText={(text) => this.setState({photo_url: text})}
-            />
-          <TextInput
-              style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1, marginBottom: 1}}
-              placeholder=" Payment URL"
-              onChangeText={(text) => this.setState({payment_url: text})}
-          />
+        <ScrollView style={{padding: 50}} ref='scrollView'>
+        <TextInput
+         ref='FirstName'
+         style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
+         placeholder=" First Name"
+         onChangeText={(text) => this.setState({first_name: text})}
+         onSubmitEditing={(event) => {
+           this.refs.LastName.focus();
+         }}
+       />
+       <TextInput
+         ref='LastName'
+         style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
+         placeholder=" Last Name"
+         onChangeText={(text) => this.setState({last_name: text})}
+         onSubmitEditing={(event) => {
+           this.refs.PhotoUrl.focus();
+         }}
+         onFocus={this.inputFocused.bind(this, 'LastName')}
+        />
+       <TextInput
+         ref='PhotoUrl'
+         style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
+         placeholder=" Photo URL"
+         onChangeText={(text) => this.setState({photo_url: text})}
+         onSubmitEditing={(event) => {
+           this.refs.PaymentUrl.focus();
+         }}
+         onFocus={this.inputFocused.bind(this, 'PhotoUrl')}
+         />
+       <TextInput
+         ref='PaymentUrl'
+         style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1, marginBottom: 1}}
+         placeholder=" Payment URL"
+         onChangeText={(text) => this.setState({payment_url: text})}
+         onFocus={this.inputFocused.bind(this, 'PaymentUrl')}
+       />
 
           <Button large success block
             onPress={this.registerTippee.bind(this)}>
             Submit Registration
           </Button>
 
-        </View>
+        </ScrollView>
       </View>
     );
   }
