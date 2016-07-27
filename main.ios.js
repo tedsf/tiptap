@@ -147,12 +147,13 @@ class Main extends Component {
               () => {
                this.setState({modalVisible: false});
                (AlertIOS.alert(
-                 "You tipped $1",
-                 "Thanks!"));
+                 "Thanks for your tip!",
+               "- Team TipTap"
+                ));
             }}>
                <Image
                source={{uri:'https://developer.apple.com/library/safari/documentation/UserExperience/Conceptual/MobileHIG/Art/apple_pay_payment_sheet_2x.png'}}
-               style={{width: 250, height:400}}
+               style={{width: 315, height:385}}
                />
              </TouchableHighlight>
            </View>
@@ -163,17 +164,11 @@ class Main extends Component {
           $1
         </Button>
 
-        <Button success block
-          onPress={() => (AlertIOS.alert(
-            "You tipped $5",
-            "Thanks!"))}>
+        <Button success block onPress={() => this.setState({modalVisible: true})}>
           $5
         </Button>
 
-        <Button success block
-          onPress={() => (AlertIOS.alert(
-            "You tipped $10",
-            "Thanks!"))}>
+        <Button success block onPress={() => this.setState({modalVisible: true})}>
           $10
         </Button>
 
