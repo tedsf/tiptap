@@ -19,7 +19,7 @@ import Main from './main'
 import Registration from './registration'
 import Active from './active'
 
-class Project extends Component {
+class TipTap extends Component {
   render() {
     return (
       <Navigator
@@ -61,4 +61,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('Project', () => Project);
+AppRegistry.registerComponent('Project', () => TipTap);
