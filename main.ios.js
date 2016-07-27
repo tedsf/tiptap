@@ -88,7 +88,6 @@ class Main extends Component {
             statusBar={{ tintColor:  "white", hideAnimation: 'none' }}
         />
 
-
         <View style={styles.container}>
 
           <Text style={styles.welcome}>
@@ -109,7 +108,7 @@ class Main extends Component {
 
         <View>
          <Modal
-           animated={ true }
+           animationType={ 'slide' }
            transparent={ true }
            visible={(this.state && this.state.modalVisible)}>
            <View
@@ -120,8 +119,7 @@ class Main extends Component {
                justifyContent: 'center',
                padding: 20,
              }}>
-             {/*}<Text>
-           Hello Modal</Text>*/}
+
             <TouchableHighlight onPress={
               () => {
                this.setState({modalVisible: false});
@@ -132,7 +130,7 @@ class Main extends Component {
             }}>
                <Image
                source={{uri:'https://developer.apple.com/library/safari/documentation/UserExperience/Conceptual/MobileHIG/Art/apple_pay_payment_sheet_2x.png'}}
-               style={{width: 315, height:385}}
+               style={{width: 400, height:460, padding}}
                />
              </TouchableHighlight>
            </View>
