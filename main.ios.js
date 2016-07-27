@@ -15,6 +15,7 @@ import {
   AlertIOS,
   Modal,
   AsyncStorage,
+  DeviceEventEmitter,
 } from 'react-native'
 import React, { Component } from 'react';
 import Error from './error'
@@ -22,7 +23,6 @@ import Registration from './registration'
 import Active from './active'
 import BeaconBroadcast from 'beaconbroadcast';
 import Beacons from 'react-native-ibeacon';
-import { DeviceEventEmitter } from 'react-native';
 
 var region = {
     identifier: 'TipTap',
@@ -93,7 +93,6 @@ class Main extends Component {
             statusBar={{ tintColor:  "white", hideAnimation: 'none' }}
         />
 
-
         <View style={styles.container}>
 
           <Text style={styles.welcome}>
@@ -113,36 +112,35 @@ class Main extends Component {
         <Text>{'\n'}</Text>
 
         <View>
-         <Modal
-           animated={ true }
-           transparent={ true }
-           visible={(this.state && this.state.modalVisible)}>
-           <View
-             style={{
-               flex: 1,
-               backgroundColor: '#f5fcff',
-               alignItems: 'center',
-               justifyContent: 'center',
-               padding: 20,
-             }}>
-             {/*}<Text>
-           Hello Modal</Text>*/}
-            <TouchableHighlight onPress={
-              () => {
-               this.setState({modalVisible: false});
-               (AlertIOS.alert(
-                 "Thanks for your tip!",
-               "- Team TipTap"
-                ));
-            }}>
-               <Image
-               source={{uri:'https://developer.apple.com/library/safari/documentation/UserExperience/Conceptual/MobileHIG/Art/apple_pay_payment_sheet_2x.png'}}
-               style={{width: 315, height:385}}
-               />
-             </TouchableHighlight>
-           </View>
-         </Modal>
-       </View>
+          <Modal
+            animated={ true }
+            transparent={ true }
+            visible={(this.state && this.state.modalVisible)}>
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: '#f5fcff',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: 20,
+              }}>
+              <TouchableHighlight onPress={
+                () => {
+                  this.setState({modalVisible: false});
+                  (AlertIOS.alert(
+                    "Thanks for your tip!",
+                    "- Team TipTap"
+                  ));
+                }
+              }>
+                <Image
+                  source={{uri:'https://developer.apple.com/library/safari/documentation/UserExperience/Conceptual/MobileHIG/Art/apple_pay_payment_sheet_2x.png'}}
+                  style={{width: 315, height:385}}
+                />
+              </TouchableHighlight>
+            </View>
+          </Modal>
+        </View>
 
         <Button success block onPress={() => this.setState({modalVisible: true}) }>
           $1
