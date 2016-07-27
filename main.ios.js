@@ -1,28 +1,26 @@
 import { Button } from 'native-base';
-
 import NavigationBar from 'react-native-navbar'
-import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  SegmentedControlIOS,
-  TouchableHighlight,
-  Image,
-  Switch,
-  ScrollView,
-  DatePickerIOS,
-  Navigator,
-  AlertIOS,
-
+  AppRegistry, StyleSheet, Text, View, SegmentedControlIOS, TouchableHighlight,
+  Image, Switch, ScrollView, DatePickerIOS, Navigator, AlertIOS,
 } from 'react-native'
-
+import React, { Component } from 'react';
 import Error from './error'
 import Registration from './registration'
 import Active from './active'
 import BeaconBroadcast from 'beaconbroadcast';
+import Beacons from 'react-native-ibeacon';
+import { DeviceEventEmitter } from 'react-native';
 
+var region = {
+    identifier: 'TipTap',
+    uuid: 'c617d2c3-25a7-45d3-96c5-51a9e3731862'
+};
+
+Beacons.requestWhenInUseAuthorization();
+Beacons.startMonitoringForRegion(region);
+Beacons.startRangingBeaconsInRegion(region);
+Beacons.startUpdatingLocation();
 
 class Main extends Component {
   constructor(props) {
@@ -35,38 +33,37 @@ class Main extends Component {
     }
   }
 
-  _onPressButtonGET() {
-    var that = this;
-    fetch("https://tiptap-api.herokuapp.com/tippees", {method: "GET"})
-    .then((response) => response.json())
-    .then((responseData) => {
-      that.setState({firstName: responseData[0].first_name})
-      that.setState({lastName: responseData[0].last_name})
-      that.setState({paymentUrl: responseData[0].payment_url})
-      that.setState({photoUrl: responseData[0].photo_url})
-
-        // AlertIOS.alert(
-        //     "GET Response",
-        //     "Search Query -> " + first_name + " " + last_name
-        // )
-    })
-    .done();
+  componentWillMount () {
+    DeviceEventEmitter.addListener(
+      'beaconsDidRange',
+      (data) => {
+        fetch("https://tiptap-api.herokuapp.com/tippees/" + data.beacons[0].minor, {method: "GET"})
+        .then((response) => response.json())
+        .then((responseData) => {
+          this.setState({firstName: responseData.first_name})
+          this.setState({lastName: responseData.last_name})
+          this.setState({paymentUrl: responseData.payment_url})
+          this.setState({photoUrl: responseData.photo_url})
+        })
+        .done();
+      }
+    )
   }
-  
 
   activate(){
-      BeaconBroadcast.startAdvertisingBeaconWithString('b075ec89-2d25-4e38-8182-d5a07cea17a0', 'ben')
+    BeaconBroadcast.startAdvertisingBeaconWithString('b075ec89-2d25-4e38-8182-d5a07cea17a0', 'ben')
   }
 
   deactivate(){
     BeaconBroadcast.stopAdvertisingBeacon()
   }
 
-    navigate(routeName) {
+  navigate(routeName) {
     this.props.navigator.push({
       name: routeName
     });
   }
+  
   render() {
     return (
       <ScrollView>
@@ -78,35 +75,10 @@ class Main extends Component {
             statusBar={{ tintColor:  "white", hideAnimation: 'none' }}
         />
 
-        <Switch
-          value={(this.state && this.state.switchValue) || false}
-          onValueChange={(value) => {
-            this.setState({switchValue: value})
-          }}
-          tintColor={ "rgba(230,230,230,1)" }
-          onTintColor={ "rgba(68,219,94,1)" }
-        />
-        <Button bordered success block onPress={this._onPressButtonGET.bind(this)} style={styles.button}>
-          SEARCH
-        </Button>
-
-        
-
-        
-        {/*<Text>{'\n'}{'\n'}</Text>
-        <Text style={styles.welcome}>
-          Nobody in your area is looking for tips!
-        </Text>
         <View style={styles.container}>
-          <Image style={styles.image}
-            resizeMode={ "contain" }
-            source={{uri:'http://i.imgur.com/CGB5Uv9.png'}}
-            />
-        </View>*/}
-
-        <View style={styles.container}>
+          
           <Text style={styles.welcome}>
-           {this.state.firstName} {this.state.lastName}
+            {this.state.firstName} {this.state.lastName}
           </Text>
 
           <Image
@@ -143,15 +115,15 @@ class Main extends Component {
         </Button>
 
         <Button large bordered success block
-         onPress={() => this.activate()}>
+          onPress={() => this.activate()}>
           Activate
         </Button>
+        
         <Button large bordered success block
-        onPress={() => this.deactivate()}>
+          onPress={() => this.deactivate()}>
           Deactivate
         </Button>
-
-        <Text>{'\n'}{'\n'}</Text>
+        
         <Text>{'\n'}{'\n'}</Text>
       </ScrollView>
     );
