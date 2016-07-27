@@ -14,6 +14,7 @@ import {
   Navigator,
   AlertIOS,
   Modal,
+  AsyncStorage,
 } from 'react-native'
 import React, { Component } from 'react';
 import Error from './error'
