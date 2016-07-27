@@ -112,35 +112,36 @@ class Main extends Component {
         <Text>{'\n'}</Text>
 
         <View>
-          <Modal
-            animated={ true }
-            transparent={ true }
-            visible={(this.state && this.state.modalVisible)}>
-            <View
-              style={{
-                flex: 1,
-                backgroundColor: '#f5fcff',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: 20,
-              }}>
-              <TouchableHighlight onPress={
-                () => {
-                  this.setState({modalVisible: false});
-                  (AlertIOS.alert(
-                    "Thanks for your tip!",
-                    "- Team TipTap"
-                  ));
-                }
-              }>
-                <Image
-                  source={{uri:'https://developer.apple.com/library/safari/documentation/UserExperience/Conceptual/MobileHIG/Art/apple_pay_payment_sheet_2x.png'}}
-                  style={{width: 315, height:385}}
-                />
-              </TouchableHighlight>
-            </View>
-          </Modal>
-        </View>
+<<<<<<< HEAD
+         <Modal
+           animationType={ 'slide' }
+           transparent={ true }
+           visible={(this.state && this.state.modalVisible)}>
+           <View
+             style={{
+               flex: 1,
+               backgroundColor: '#f5fcff',
+               alignItems: 'center',
+               justifyContent: 'center',
+               padding: 20,
+             }}>
+
+            <TouchableHighlight onPress={
+              () => {
+               this.setState({modalVisible: false});
+               (AlertIOS.alert(
+                 "Thanks for your tip!",
+               "- Team TipTap"
+                ));
+            }}>
+               <Image
+               source={{uri:'https://developer.apple.com/library/safari/documentation/UserExperience/Conceptual/MobileHIG/Art/apple_pay_payment_sheet_2x.png'}}
+               style={{width: 315, height:385 }}
+               />
+             </TouchableHighlight>
+           </View>
+         </Modal>
+       </View>
 
         <Button success block onPress={() => this.setState({modalVisible: true}) }>
           $1
