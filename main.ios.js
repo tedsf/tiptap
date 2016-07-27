@@ -74,6 +74,9 @@ class Main extends Component {
         }
       }
     )
+  }
+
+  componentDidMount() {
     AsyncStorage.getItem(
       'beacons',
       (error, result) => {
@@ -81,28 +84,17 @@ class Main extends Component {
       }
     )
   }
-  
-  // when you integrate payments this needs to be downstream of apple confirmation
-  
-    onTip(num) {
-        fetch("https://tiptap-api.herokuapp.com/tips", {
-          method: "POST", 
-          headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }, body: JSON.stringify({tip: {amount: num, tippee_id: this.state.tippeeId, processed: true}})})
-        .then((response) => response.json())
-        .done();
-    }
-  
-  activate(){
-    // TODO:  BeaconBroadcast does not support configuration of a beacon's major and minor values.  They have been hard-coded in node_modules/beaconbroadcast/BeaconBroadcast.m to major:0, minor:1.  The system needs to broadcast the major and minor values stored in beacons.
-    // TODO:  This app is currently hard coded to support the first beacon in the beacons array only.
-    BeaconBroadcast.startAdvertisingBeaconWithString(this.state.beacons[0].uuid, 'TipTap')
-  }
 
-  deactivate(){
-    BeaconBroadcast.stopAdvertisingBeacon()
+  onTip(num) {
+    // TODO: This function should be called upon confirmation of a successful payment.  It is currently called too soon.
+    fetch("https://tiptap-api.herokuapp.com/tips", {
+      method: "POST",
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }, body: JSON.stringify({tip: {amount: num, tippee_id: this.state.tippeeId, processed: true}})})
+    .then((response) => response.json())
+    .done();
   }
 
   navigate(routeName) {
@@ -116,8 +108,9 @@ class Main extends Component {
       <ScrollView>
         <NavigationBar
             title={{ title:  'TipTap!' , tintColor:  'black' , }}
-            rightButton={{ title: 'Get Tips', tintColor: 'black', handler: this.navigate.bind(this, "search")}}
-            leftButton={{ title: 'Register', tintColor: 'black', handler: this.navigate.bind(this, "registration")} }
+            rightButton={{ title: 'Get Tips', tintColor: 'black', handler: this.navigate.bind(this,
+              (this.state.beacons && this.state.beacons.length > 0) ? "active" : "registration"
+            )}}
             style={{ backgroundColor:  "#D3D3D3" , }}
             statusBar={{ tintColor:  "white", hideAnimation: 'none' }}
         />
@@ -190,20 +183,6 @@ class Main extends Component {
                 this.onTip(10)
               }}>
               $10
-            </Button>
-          </View>
-        ): null }
-        
-        {(this.state.beacons && this.state.beacons.length > 0) ? (
-          <View>
-            <Button large bordered success block
-              onPress={() => this.activate()}>
-              Activate
-            </Button>
-
-            <Button large bordered success block
-              onPress={() => this.deactivate()}>
-              Deactivate
             </Button>
           </View>
         ): null }

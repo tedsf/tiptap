@@ -6,9 +6,11 @@ import {
   ListView,
   Navigator,
   TouchableHighlight,
-  Image
+  Image,
+  AsyncStorage,
 } from 'react-native';
 import NavigationBar from 'react-native-navbar'
+import BeaconBroadcast from 'beaconbroadcast';
 
 class Active extends Component {
   navigate(routeName) {
@@ -16,6 +18,21 @@ class Active extends Component {
       name: routeName
       // passProps: {name: routeName},
     })
+  }
+
+  componentDidMount() {
+    AsyncStorage.getItem(
+      'beacons',
+      (error, result) => {
+        // TODO:  BeaconBroadcast does not support configuration of a beacon's major and minor values.  They have been hard-coded in node_modules/beaconbroadcast/BeaconBroadcast.m to major:0, minor:1.  The system needs to broadcast the major and minor values stored in beacons.
+        // TODO:  This app is currently hard coded to support the first beacon in the beacons array only.
+        BeaconBroadcast.startAdvertisingBeaconWithString(JSON.parse(result)[0].uuid, 'TipTap')
+      }
+    )
+  }
+
+  componentWillUnmount() {
+    BeaconBroadcast.stopAdvertisingBeacon()
   }
 
   render() {
