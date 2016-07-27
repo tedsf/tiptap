@@ -14,6 +14,7 @@ import {
   Navigator,
   TouchableHighlight,
   AlertIOS,
+  AsyncStorage,
 } from 'react-native'
 
 class Registration extends Component {
@@ -79,7 +80,13 @@ class Registration extends Component {
       'Content-Type': 'application/json'
     }, body: JSON.stringify({tippee: that.state})})
     .then((response) => response.json())
-    .then(that.navigate("main"))
+    .then((responseJson) => {
+      AsyncStorage.setItem(
+        'beacons',
+        JSON.stringify(responseJson.beacons),
+        () => that.navigate("main")
+      )
+    })
     .done();
   }
 }
