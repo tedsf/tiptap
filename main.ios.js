@@ -42,7 +42,8 @@ class Main extends Component {
       lastName: '',
       photoUrl: 'http://i.imgur.com/CGB5Uv9.png',
       paymentUrl: '',
-      modalVisible: false
+      modalVisible: false,
+      beacons: [],
     }
   }
 
@@ -67,15 +68,18 @@ class Main extends Component {
         }
       }
     )
+    AsyncStorage.getItem(
+      'beacons',
+      (error, result) => {
+        this.setState({beacons: JSON.parse(result)})
+      }
+    )
   }
 
   activate(){
-    AsyncStorage.getItem(
-      'beacons',
-      // TODO:  BeaconBroadcast does not support configuration of a beacon's major and minor values.  They have been hard-coded in node_modules/beaconbroadcast/BeaconBroadcast.m to major:0, minor:1.  The system needs to broadcast the major and minor values stored in beacons.
-      // TODO:  This app is currently hard to support the first beacon in the beacons array only.
-      (error, result) => BeaconBroadcast.startAdvertisingBeaconWithString(JSON.parse(result)[0].uuid, 'TipTap')
-    )
+    // TODO:  BeaconBroadcast does not support configuration of a beacon's major and minor values.  They have been hard-coded in node_modules/beaconbroadcast/BeaconBroadcast.m to major:0, minor:1.  The system needs to broadcast the major and minor values stored in beacons.
+    // TODO:  This app is currently hard coded to support the first beacon in the beacons array only.
+    BeaconBroadcast.startAdvertisingBeaconWithString(this.state.beacons[0].uuid, 'TipTap')
   }
 
   deactivate(){
@@ -160,15 +164,19 @@ class Main extends Component {
           $10
         </Button>
 
-        <Button large bordered success block
-          onPress={() => this.activate()}>
-          Activate
-        </Button>
+        {(this.state.beacons && this.state.beacons.length > 0) ? (
+          <View>
+            <Button large bordered success block
+              onPress={() => this.activate()}>
+              Activate
+            </Button>
 
-        <Button large bordered success block
-          onPress={() => this.deactivate()}>
-          Deactivate
-        </Button>
+            <Button large bordered success block
+              onPress={() => this.deactivate()}>
+              Deactivate
+            </Button>
+          </View>
+        ): null }
 
         <Text>{'\n'}{'\n'}</Text>
       </ScrollView>
