@@ -72,22 +72,15 @@ class Main extends Component {
         }
       }
     )
+  }
+
+  componentDidMount() {
     AsyncStorage.getItem(
       'beacons',
       (error, result) => {
         this.setState({beacons: JSON.parse(result)})
       }
     )
-  }
-
-  activate(){
-    // TODO:  BeaconBroadcast does not support configuration of a beacon's major and minor values.  They have been hard-coded in node_modules/beaconbroadcast/BeaconBroadcast.m to major:0, minor:1.  The system needs to broadcast the major and minor values stored in beacons.
-    // TODO:  This app is currently hard coded to support the first beacon in the beacons array only.
-    BeaconBroadcast.startAdvertisingBeaconWithString(this.state.beacons[0].uuid, 'TipTap')
-  }
-
-  deactivate(){
-    BeaconBroadcast.stopAdvertisingBeacon()
   }
 
   navigate(routeName) {
@@ -101,8 +94,9 @@ class Main extends Component {
       <ScrollView>
         <NavigationBar
             title={{ title:  'TipTap!' , tintColor:  'black' , }}
-            rightButton={{ title: 'Get Tips', tintColor: 'black', handler: this.navigate.bind(this, "search")}}
-            leftButton={{ title: 'Register', tintColor: 'black', handler: this.navigate.bind(this, "registration")} }
+            rightButton={{ title: 'Get Tips', tintColor: 'black', handler: this.navigate.bind(this,
+              (this.state.beacons && this.state.beacons.length > 0) ? "active" : "registration"
+            )}}
             style={{ backgroundColor:  "#D3D3D3" , }}
             statusBar={{ tintColor:  "white", hideAnimation: 'none' }}
         />
@@ -166,20 +160,6 @@ class Main extends Component {
             </Button>
             <Button success block onPress={() => this.setState({modalVisible: true})}>
               $10
-            </Button>
-          </View>
-        ): null }
-
-        {(this.state.beacons && this.state.beacons.length > 0) ? (
-          <View>
-            <Button large bordered success block
-              onPress={() => this.activate()}>
-              Activate
-            </Button>
-
-            <Button large bordered success block
-              onPress={() => this.deactivate()}>
-              Deactivate
             </Button>
           </View>
         ): null }

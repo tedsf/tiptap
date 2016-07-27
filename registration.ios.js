@@ -84,7 +84,7 @@ class Registration extends Component {
       AsyncStorage.setItem(
         'beacons',
         JSON.stringify(responseJson.beacons),
-        () => that.navigate("main")
+        () => that.navigate("active")
       )
     })
     .done();
