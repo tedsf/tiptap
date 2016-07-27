@@ -52,19 +52,23 @@ class Main extends Component {
       'beaconsDidRange',
       (data) => {
         if (data.beacons[0]) {
-        fetch("https://tiptap-api.herokuapp.com/tippees/" + data.beacons[0].minor, {method: "GET"})
-        .then((response) => response.json())
-        .then((responseData) => {
-          this.setState({firstName: responseData.first_name})
-          this.setState({lastName: responseData.last_name})
-          this.setState({paymentUrl: responseData.payment_url})
-          this.setState({photoUrl: responseData.photo_url})
-        })
-        .done()} else {
+          // TODO:  This app is currently hard coded to support the first beacon in the beacons array only.
+          // TODO: This fetch presumes that minor value of the first beacon = the relevant tippee_id, which will break if any tippee has more than one beacon or the tippee_id is greater than 2 bytes.  This fetch should more explicitly request the tippee data associated with the beacon based on its major and minor values.
+          fetch("https://tiptap-api.herokuapp.com/tippees/" + data.beacons[0].minor, {method: "GET"})
+          .then((response) => response.json())
+          .then((responseData) => {
+            this.setState({firstName: responseData.first_name})
+            this.setState({lastName: responseData.last_name})
+            this.setState({photoUrl: responseData.photo_url})
+            this.setState({paymentUrl: responseData.payment_url})
+            })
+          .done()
+        }
+        else {
           this.setState({firstName: 'No users are in your area'})
           this.setState({lastName: ''})
           this.setState({photoUrl: 'http://i.imgur.com/CGB5Uv9.png'})
-          
+          this.setState({paymentUrl: ''})
         }
       }
     )
