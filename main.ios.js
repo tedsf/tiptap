@@ -15,6 +15,7 @@ import {
   DatePickerIOS,
   Navigator,
   AlertIOS,
+  Modal,
 
 } from 'react-native'
 
@@ -31,7 +32,8 @@ class Main extends Component {
       firstName: 'No users are in your area',
       lastName: '',
       photoUrl: 'http://i.imgur.com/CGB5Uv9.png',
-      paymentUrl: ''
+      paymentUrl: '',
+      modalVisible: false
     }
   }
 
@@ -52,7 +54,12 @@ class Main extends Component {
     })
     .done();
   }
-  
+
+  _onPressModal(){
+    var that = this;
+    that.setState({visible: true})
+  }
+
 
   activate(){
       BeaconBroadcast.startAdvertisingBeaconWithString('b075ec89-2d25-4e38-8182-d5a07cea17a0', 'ben')
@@ -90,9 +97,9 @@ class Main extends Component {
           SEARCH
         </Button>
 
-        
 
-        
+
+
         {/*<Text>{'\n'}{'\n'}</Text>
         <Text style={styles.welcome}>
           Nobody in your area is looking for tips!
@@ -121,24 +128,47 @@ class Main extends Component {
 
         <Text>{'\n'}</Text>
 
-        <Button success block
-          onPress={() => (AlertIOS.alert(
-            "You tipped $1",
-            "Thanks!"))}>
+        <View>
+         <Modal
+           animated={ true }
+           transparent={ true }
+           visible={(this.state && this.state.modalVisible)}>
+           <View
+             style={{
+               flex: 1,
+               backgroundColor: '#f5fcff',
+               alignItems: 'center',
+               justifyContent: 'center',
+               padding: 20,
+             }}>
+             {/*}<Text>
+           Hello Modal</Text>*/}
+            <TouchableHighlight onPress={
+              () => {
+               this.setState({modalVisible: false});
+               (AlertIOS.alert(
+                 "Thanks for your tip!",
+               "- Team TipTap"
+                ));
+            }}>
+               <Image
+               source={{uri:'https://developer.apple.com/library/safari/documentation/UserExperience/Conceptual/MobileHIG/Art/apple_pay_payment_sheet_2x.png'}}
+               style={{width: 315, height:385}}
+               />
+             </TouchableHighlight>
+           </View>
+         </Modal>
+       </View>
+
+        <Button success block onPress={() => this.setState({modalVisible: true}) }>
           $1
         </Button>
 
-        <Button success block
-          onPress={() => (AlertIOS.alert(
-            "You tipped $5",
-            "Thanks!"))}>
+        <Button success block onPress={() => this.setState({modalVisible: true})}>
           $5
         </Button>
 
-        <Button success block
-          onPress={() => (AlertIOS.alert(
-            "You tipped $10",
-            "Thanks!"))}>
+        <Button success block onPress={() => this.setState({modalVisible: true})}>
           $10
         </Button>
 
