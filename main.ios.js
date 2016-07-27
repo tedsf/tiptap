@@ -50,6 +50,7 @@ class Main extends Component {
     DeviceEventEmitter.addListener(
       'beaconsDidRange',
       (data) => {
+        if (data.beacons[0]) {
         fetch("https://tiptap-api.herokuapp.com/tippees/" + data.beacons[0].minor, {method: "GET"})
         .then((response) => response.json())
         .then((responseData) => {
@@ -58,7 +59,12 @@ class Main extends Component {
           this.setState({paymentUrl: responseData.payment_url})
           this.setState({photoUrl: responseData.photo_url})
         })
-        .done();
+        .done()} else {
+          this.setState({firstName: 'No users are in your area'})
+          this.setState({lastName: ''})
+          this.setState({photoUrl: 'http://i.imgur.com/CGB5Uv9.png'})
+          
+        }
       }
     )
   }
@@ -112,7 +118,6 @@ class Main extends Component {
         <Text>{'\n'}</Text>
 
         <View>
-<<<<<<< HEAD
          <Modal
            animationType={ 'slide' }
            transparent={ true }
