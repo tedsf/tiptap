@@ -130,7 +130,7 @@ class Main extends Component {
             }}>
                <Image
                source={{uri:'https://developer.apple.com/library/safari/documentation/UserExperience/Conceptual/MobileHIG/Art/apple_pay_payment_sheet_2x.png'}}
-               style={{width: 400, height:460, padding}}
+               style={{width: 315, height:385 }}
                />
              </TouchableHighlight>
            </View>
