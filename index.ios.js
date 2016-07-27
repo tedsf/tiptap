@@ -48,14 +48,6 @@ class Project extends Component {
       return <Registration navigator={navigator} {...route.passProps} />
     }
   }
-
-//   navigate(routeName) {
-//     this.props.navigator.push({
-//       name: routeName
-//       // passProps: {name: routeName},
-//     })
-//   }
-
 }
 
 const styles = StyleSheet.create({
