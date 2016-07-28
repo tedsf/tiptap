@@ -10,16 +10,15 @@ import {
 import { Button } from 'native-base';
 import NavigationBar from 'react-native-navbar';
 
-class Registration extends Component {
+class TippeeMaker extends Component {
   constructor(props) {
     super(props);
-    this.state = {first_name: '', last_name: '', photo_url: '', payment_url: '', loading: false};
-  }
-
-  navigate(routeName) {
-    this.props.navigator.push({
-      name: routeName
-    });
+    this.state = {
+      first_name: '',
+      last_name: '',
+      photo_url: '',
+      payment_url: '',
+      loading: false};
   }
 
   inputFocused(refName) {
@@ -31,71 +30,6 @@ class Registration extends Component {
         true
       );
     }, 50);
-  }
-
-  render() {
-    return (
-      <View>
-        <NavigationBar
-            title={{ title:  'TipTap!' , tintColor:  'black' , }}
-            leftButton={{ title: 'Back', tintColor: 'black', handler: this.navigate.bind(this, "main")} }
-            style={{ backgroundColor:  "#D3D3D3" , }}
-            statusBar={{ tintColor:  "white" , }}
-        />
-
-        <ScrollView style={{padding: 50}} ref='scrollView'>
-          <TextInput
-            ref='FirstName'
-            style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
-            placeholder=" First Name"
-            onChangeText={(text) => this.setState({first_name: text})}
-            onSubmitEditing={(event) => {
-              this.refs.LastName.focus();
-            }}
-          />
-          <TextInput
-            ref='LastName'
-            style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
-            placeholder=" Last Name"
-            onChangeText={(text) => this.setState({last_name: text})}
-            onSubmitEditing={(event) => {
-              this.refs.PhotoUrl.focus();
-            }}
-            onFocus={this.inputFocused.bind(this, 'LastName')}
-          />
-          <TextInput
-            ref='PhotoUrl'
-            style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
-            placeholder=" Photo URL"
-            onChangeText={(text) => this.setState({photo_url: text})}
-            onSubmitEditing={(event) => {
-              this.refs.PaymentUrl.focus();
-            }}
-            onFocus={this.inputFocused.bind(this, 'PhotoUrl')}
-          />
-          <TextInput
-            ref='PaymentUrl'
-            style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1, marginBottom: 1}}
-            placeholder=" Payment URL"
-            onChangeText={(text) => this.setState({payment_url: text})}
-            onFocus={this.inputFocused.bind(this, 'PaymentUrl')}
-          />
-
-          {(!this.state.loading) ? (
-            <Button large success block
-              onPress={this.registerTippee.bind(this)}
-              visible={(!this.state.loading)}>
-              Submit Registration
-            </Button>
-          ) : (
-            <Button large success block transparent visible={(this.state.loading)}>
-              Registering...
-            </Button>
-          )}
-
-        </ScrollView>
-      </View>
-    );
   }
 
   registerTippee() {
@@ -115,8 +49,8 @@ class Registration extends Component {
         AsyncStorage.setItem(
           'beacons',
           JSON.stringify(responseJson.beacons),
-          () => that.navigate("active")
-        )
+          that.props.handler
+        );
       })
       .done();
     } else {
@@ -124,6 +58,85 @@ class Registration extends Component {
         "Missing required fields!",
         "- Team TipTap")
     }
+  }
+
+  render(){
+    return(
+      <ScrollView style={{padding: 50}} ref='scrollView'>
+        <TextInput
+          ref='FirstName'
+          style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
+          placeholder=" First Name"
+          onChangeText={(text) => this.setState({first_name: text})}
+          onSubmitEditing={(event) => {
+            this.refs.LastName.focus();
+          }}
+        />
+        <TextInput
+          ref='LastName'
+          style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
+          placeholder=" Last Name"
+          onChangeText={(text) => this.setState({last_name: text})}
+          onSubmitEditing={(event) => {
+            this.refs.PhotoUrl.focus();
+          }}
+          onFocus={this.inputFocused.bind(this, 'LastName')}
+        />
+        <TextInput
+          ref='PhotoUrl'
+          style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
+          placeholder=" Photo URL"
+          onChangeText={(text) => this.setState({photo_url: text})}
+          onSubmitEditing={(event) => {
+            this.refs.PaymentUrl.focus();
+          }}
+          onFocus={this.inputFocused.bind(this, 'PhotoUrl')}
+        />
+        <TextInput
+          ref='PaymentUrl'
+          style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1, marginBottom: 1}}
+          placeholder=" Payment URL"
+          onChangeText={(text) => this.setState({payment_url: text})}
+          onFocus={this.inputFocused.bind(this, 'PaymentUrl')}
+        />
+
+        {(!this.state.loading) ? (
+          <Button large success block
+            onPress={this.registerTippee.bind(this)}
+            visible={(!this.state.loading)}>
+            Submit Registration
+          </Button>
+        ) : (
+          <Button large success block transparent visible={(this.state.loading)}>
+            Registering...
+          </Button>
+        )}
+      </ScrollView>
+    );
+  }
+}
+
+class Registration extends Component {
+  navigate(routeName) {
+    this.props.navigator.push({
+      name: routeName
+    });
+  }
+
+  render() {
+    return (
+      <View>
+        <NavigationBar
+            title={{ title:  'TipTap!' , tintColor:  'black' , }}
+            leftButton={{ title: 'Back', tintColor: 'black', handler: this.navigate.bind(this, "main")} }
+            style={{ backgroundColor:  "#D3D3D3" , }}
+            statusBar={{ tintColor:  "white" , }}
+        />
+        <TippeeMaker
+          handler={ this.navigate.bind(this, "active") }
+        />
+      </View>
+    );
   }
 }
 

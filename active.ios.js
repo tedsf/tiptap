@@ -9,14 +9,7 @@ import {
 import NavigationBar from 'react-native-navbar';
 import BeaconBroadcast from 'beaconbroadcast';
 
-class Active extends Component {
-  navigate(routeName) {
-    BeaconBroadcast.stopAdvertisingBeacon()
-    this.props.navigator.push({
-      name: routeName
-    });
-  }
-
+class BeaconBroadcaster extends Component {
   componentDidMount() {
     AsyncStorage.getItem(
       'beacons',
@@ -30,6 +23,34 @@ class Active extends Component {
 
   render() {
     return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          Looking for tips!
+        </Text>
+
+        <Image
+          style={{
+            width:  300 ,
+            height:  200 ,
+          }}
+          resizeMode={ "contain" }
+          source={{uri:'http://i.imgur.com/jVXo2FL.png'}}
+          />
+      </View>
+    );
+  }
+}
+
+class Active extends Component {
+  navigate(routeName) {
+    BeaconBroadcast.stopAdvertisingBeacon()
+    this.props.navigator.push({
+      name: routeName
+    });
+  }
+
+  render() {
+    return (
       <View>
         <NavigationBar
             title={{ title:  'TipTap!' , tintColor:  'black' , }}
@@ -37,20 +58,8 @@ class Active extends Component {
             style={{ backgroundColor:  "#D3D3D3" , }}
             statusBar={{ tintColor:  "white" , }}
         />
-        <View style={styles.container}>
-          <Text style={styles.welcome}>
-            Looking for tips!
-          </Text>
-
-          <Image
-            style={{
-              width:  300 ,
-              height:  200 ,
-            }}
-            resizeMode={ "contain" }
-            source={{uri:'http://i.imgur.com/jVXo2FL.png'}}
-            />
-        </View>
+        <BeaconBroadcaster
+        />
       </View>
     );
   }
