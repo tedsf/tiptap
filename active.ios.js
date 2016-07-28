@@ -3,11 +3,10 @@ import {
   StyleSheet,
   Text,
   View,
-  Navigator,
   Image,
   AsyncStorage,
 } from 'react-native';
-import NavigationBar from 'react-native-navbar'
+import NavigationBar from 'react-native-navbar';
 import BeaconBroadcast from 'beaconbroadcast';
 
 class Active extends Component {

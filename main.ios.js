@@ -1,27 +1,18 @@
-import { Button } from 'native-base';
-import NavigationBar from 'react-native-navbar'
+import React, { Component } from 'react';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
-  SegmentedControlIOS,
   TouchableHighlight,
   Image,
-  Switch,
   ScrollView,
-  DatePickerIOS,
-  Navigator,
   AlertIOS,
   Modal,
   AsyncStorage,
   DeviceEventEmitter,
-} from 'react-native'
-
-import React, { Component } from 'react';
-import Registration from './registration'
-import Active from './active'
-import BeaconBroadcast from 'beaconbroadcast';
+} from 'react-native';
+import { Button } from 'native-base';
+import NavigationBar from 'react-native-navbar';
 import Beacons from 'react-native-ibeacon';
 
 var region = {
@@ -193,7 +184,6 @@ class Main extends Component {
   }
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -204,15 +194,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  },
-  image: {
-    width:  150 ,
-    height:  100 ,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });
 
