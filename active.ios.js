@@ -3,9 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
-  ListView,
   Navigator,
-  TouchableHighlight,
   Image,
   AsyncStorage,
 } from 'react-native';
@@ -17,8 +15,7 @@ class Active extends Component {
     BeaconBroadcast.stopAdvertisingBeacon()
     this.props.navigator.push({
       name: routeName
-      // passProps: {name: routeName},
-    })
+    });
   }
 
   componentDidMount() {
@@ -73,66 +70,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  },
-  title: {
-    marginTop: 250,
-    fontSize: 20,
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  bButton: {
-    backgroundColor: '#007399',
-    color: 'white',
-    textAlign: 'left',
-    marginTop: 0,
-    fontSize: 40,
-    width: 55,
-    fontWeight: 'bold',
-  },
-  nav: {
-    justifyContent: 'flex-start',
-    width: 378,
-    height: 50,
-    backgroundColor: '#007399',
-    flexDirection: 'row',
-  },
-  navtitle: {
-    fontFamily: 'Helvetica',
-    marginTop: 15,
-    marginLeft: 74,
-    fontSize: 20,
-    color: 'white',
-    letterSpacing: 14,
-  },
-    title: {
-    marginTop: 250,
-    fontSize: 20,
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  bButton: {
-    backgroundColor: '#007399',
-    color: 'white',
-    textAlign: 'left',
-    marginTop: 0,
-    fontSize: 40,
-    width: 55,
-    fontWeight: 'bold',
-  },
-  nav: {
-    justifyContent: 'flex-start',
-    width: 378,
-    height: 50,
-    backgroundColor: '#007399',
-    flexDirection: 'row',
-  },
-  navtitle: {
-    fontFamily: 'Helvetica',
-    marginTop: 15,
-    marginLeft: 74,
-    fontSize: 20,
-    color: 'white',
-    letterSpacing: 14,
   },
 });
 
