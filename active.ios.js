@@ -14,6 +14,7 @@ import BeaconBroadcast from 'beaconbroadcast';
 
 class Active extends Component {
   navigate(routeName) {
+    BeaconBroadcast.stopAdvertisingBeacon()
     this.props.navigator.push({
       name: routeName
       // passProps: {name: routeName},
@@ -29,10 +30,6 @@ class Active extends Component {
         BeaconBroadcast.startAdvertisingBeaconWithString(JSON.parse(result)[0].uuid, 'TipTap')
       }
     )
-  }
-
-  componentWillUnmount() {
-    BeaconBroadcast.stopAdvertisingBeacon()
   }
 
   render() {
