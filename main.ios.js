@@ -25,17 +25,133 @@ Beacons.startMonitoringForRegion(region);
 Beacons.startRangingBeaconsInRegion(region);
 Beacons.startUpdatingLocation();
 
-class Main extends Component {
+class TipMaker extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalVisible: false,
+    }
+  }
+
+  onTip(num) {
+    // TODO: This function should be called upon confirmation of a successful payment.  It is currently called too soon.
+    fetch("https://tiptap-api.herokuapp.com/tips", {
+      method: "POST",
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }, body: JSON.stringify({tip: {amount: num, tippee_id: this.props.tippeeId, processed: true}})})
+    .then((response) => response.json())
+    .done();
+  }
+
+  render(){
+    return (
+      <View>
+       <Modal
+         animationType={ 'slide' }
+         transparent={ true }
+         visible={(this.state.modalVisible)}>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: '#f5fcff',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 20,
+            }}>
+          <TouchableHighlight onPress={
+            () => {
+            this.setState({modalVisible: false});
+            (AlertIOS.alert(
+               "Thanks for your tip!",
+               "-Team TipTap"
+              ));
+            }}>
+        <Image
+          source={{uri:'https://developer.apple.com/library/safari/documentation/UserExperience/Conceptual/MobileHIG/Art/apple_pay_payment_sheet_2x.png'}}
+          style={{width: 315, height:385 }}
+        />
+        </TouchableHighlight>
+        </View>
+       </Modal>
+        <Button success block onPress={() => {
+            this.setState({modalVisible: true})
+            this.onTip(1)
+          }}>
+          $1
+        </Button>
+        <Button success block onPress={() => {
+            this.setState({modalVisible: true})
+            this.onTip(5)
+          }}>
+          $5
+        </Button>
+        <Button success block onPress={() => {
+            this.setState({modalVisible: true})
+            this.onTip(10)
+          }}>
+          $10
+        </Button>
+      </View>
+    );
+  }
+}
+
+class Tippee extends Component {
+  render(){
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          {this.props.firstName} {this.props.lastName}
+        </Text>
+        <Image
+          style={{
+            width:  300 ,
+            height:  200 ,
+          }}
+          resizeMode={ "contain" }
+          source={{uri:this.props.photoUrl}}
+          />
+      </View>
+    );
+  }
+}
+
+class TipableTippee extends Component {
+  render(){
+    return (
+      <ScrollView>
+        <Tippee
+          firstName={ this.props.firstName }
+          lastName={ this.props.lastName }
+          photoUrl={ this.props.photoUrl }
+        />
+
+        <Text>{'\n'}</Text>
+
+        {(this.props.lastName) ? (
+          <TipMaker
+            tippeeId={ this.props.tippeeId }
+            paymentUrl={ this.props.paymentUrl }
+          />
+        ): null }
+
+        <Text>{'\n'}{'\n'}</Text>
+      </ScrollView>
+    );
+  }
+}
+
+class NearestTipableTippee extends Component {
   constructor(props) {
     super(props);
     this.state = {
       tippeeId: '',
-      firstName: 'No users are in your area',
+      firstName: '',
       lastName: '',
-      photoUrl: 'http://i.imgur.com/CGB5Uv9.png',
+      photoUrl: '',
       paymentUrl: '',
-      modalVisible: false,
-      beacons: [],
     }
   }
 
@@ -67,25 +183,34 @@ class Main extends Component {
     )
   }
 
+  render(){
+    return (
+      <TipableTippee
+        firstName={ this.state.firstName }
+        lastName={ this.state.lastName }
+        photoUrl={ this.state.photoUrl }
+        tippeeId={ this.state.tippeeId }
+        paymentUrl={ this.state.paymentUrl }
+      />
+    );
+  }
+}
+
+class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      beacons: [],
+    }
+  }
+
   componentDidMount() {
     AsyncStorage.getItem(
       'beacons',
       (error, result) => {
         this.setState({beacons: JSON.parse(result)})
       }
-    )
-  }
-
-  onTip(num) {
-    // TODO: This function should be called upon confirmation of a successful payment.  It is currently called too soon.
-    fetch("https://tiptap-api.herokuapp.com/tips", {
-      method: "POST",
-      headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }, body: JSON.stringify({tip: {amount: num, tippee_id: this.state.tippeeId, processed: true}})})
-    .then((response) => response.json())
-    .done();
+    );
   }
 
   navigate(routeName) {
@@ -96,7 +221,7 @@ class Main extends Component {
 
   render() {
     return (
-      <ScrollView>
+      <View>
         <NavigationBar
             title={{ title:  'TipTap!' , tintColor:  'black' , }}
             rightButton={{ title: 'Get Tips', tintColor: 'black', handler: this.navigate.bind(this,
@@ -106,80 +231,8 @@ class Main extends Component {
             statusBar={{ tintColor:  "white", hideAnimation: 'none' }}
         />
 
-        <View style={styles.container}>
-
-          <Text style={styles.welcome}>
-            {this.state.firstName} {this.state.lastName}
-          </Text>
-
-          <Image
-            style={{
-              width:  300 ,
-              height:  200 ,
-            }}
-            resizeMode={ "contain" }
-            source={{uri:this.state.photoUrl}}
-            />
-        </View>
-
-        <Text>{'\n'}</Text>
-
-        <View>
-         <Modal
-           animationType={ 'slide' }
-           transparent={ true }
-           visible={(this.state && this.state.modalVisible)}>
-           <View
-             style={{
-               flex: 1,
-               backgroundColor: '#f5fcff',
-               alignItems: 'center',
-               justifyContent: 'center',
-               padding: 20,
-             }}>
-
-            <TouchableHighlight onPress={
-              () => {
-               this.setState({modalVisible: false});
-               (AlertIOS.alert(
-                 "Thanks for your tip!",
-               "- Team TipTap"
-                ));
-            }}>
-               <Image
-               source={{uri:'https://developer.apple.com/library/safari/documentation/UserExperience/Conceptual/MobileHIG/Art/apple_pay_payment_sheet_2x.png'}}
-               style={{width: 315, height:385 }}
-               />
-             </TouchableHighlight>
-           </View>
-         </Modal>
-       </View>
-
-        {(this.state.lastName) ? (
-          <View>
-            <Button success block onPress={() => {
-                this.setState({modalVisible: true})
-                this.onTip(1)
-              }}>
-              $1
-            </Button>
-            <Button success block onPress={() => {
-                this.setState({modalVisible: true})
-                this.onTip(5)
-              }}>
-              $5
-            </Button>
-            <Button success block onPress={() => {
-                this.setState({modalVisible: true})
-                this.onTip(10)
-              }}>
-              $10
-            </Button>
-          </View>
-        ): null }
-
-        <Text>{'\n'}{'\n'}</Text>
-      </ScrollView>
+        <NearestTipableTippee />
+      </View>
     );
   }
 }
