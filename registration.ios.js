@@ -8,6 +8,7 @@ import {
   TextInput,
   View,
   ScrollView,
+  Modal,
   ReactNative,
   findNodeHandle,
   SegmentedControlIOS,
@@ -23,7 +24,7 @@ import {
 class Registration extends Component {
   constructor(props) {
     super(props);
-    this.state = {first_name: '', last_name: '', photo_url: '', payment_url: ''};
+    this.state = {first_name: '', last_name: '', photo_url: '', payment_url: '', loading: false};
   }
 
   navigate(routeName) {
@@ -97,12 +98,30 @@ class Registration extends Component {
           </Button>
 
         </ScrollView>
+        <Modal
+          animationType={'fade'}
+          transparent={'true'}
+          visible={(this.state && this.state.loading)}
+        >
+          <View style={{
+            flex: 1,
+            backgroundColor: '#f5fcff',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 20,
+          }}>
+            <Text>
+              Loading...
+            </Text>
+          </View>
+        </Modal>
       </View>
     );
   }
 
   registerTippee() {
     var that = this
+    this.setState({loading: true})
     fetch("https://tiptap-api.herokuapp.com/tippees", {
       method: "POST",
       headers: {
@@ -111,6 +130,7 @@ class Registration extends Component {
     }, body: JSON.stringify({tippee: that.state})})
     .then((response) => response.json())
     .then((responseJson) => {
+      that.setState({loading: false})
       AsyncStorage.setItem(
         'beacons',
         JSON.stringify(responseJson.beacons),
