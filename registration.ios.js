@@ -120,24 +120,31 @@ class Registration extends Component {
   }
 
   registerTippee() {
-    var that = this
-    this.setState({loading: true})
-    fetch("https://tiptap-api.herokuapp.com/tippees", {
-      method: "POST",
-      headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }, body: JSON.stringify({tippee: that.state})})
-    .then((response) => response.json())
-    .then((responseJson) => {
-      that.setState({loading: false})
-      AsyncStorage.setItem(
-        'beacons',
-        JSON.stringify(responseJson.beacons),
-        () => that.navigate("active")
-      )
-    })
-    .done();
+    if (this.state.first_name && this.state.last_name && this.state.payment_url)
+      {
+      var that = this
+      this.setState({loading: true})
+      fetch("https://tiptap-api.herokuapp.com/tippees", {
+        method: "POST",
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }, body: JSON.stringify({tippee: that.state})})
+      .then((response) => response.json())
+      .then((responseJson) => {
+        that.setState({loading: false})
+        AsyncStorage.setItem(
+          'beacons',
+          JSON.stringify(responseJson.beacons),
+          () => that.navigate("main")
+        )
+      })
+      .done();
+    } else {
+      AlertIOS.alert(
+        "Missing required fields!",
+        "- Team TipTap")
+    }
   }
 }
 
