@@ -1,25 +1,14 @@
 import React, { Component } from 'react';
-import NavigationBar from 'react-native-navbar'
-import { Button } from 'native-base';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
   TextInput,
   View,
   ScrollView,
-  Modal,
-  ReactNative,
   findNodeHandle,
-  SegmentedControlIOS,
-  Image,
-  Switch,
-  DatePickerIOS,
-  Navigator,
-  TouchableHighlight,
   AlertIOS,
   AsyncStorage,
-} from 'react-native'
+} from 'react-native';
+import { Button } from 'native-base';
+import NavigationBar from 'react-native-navbar';
 
 class Registration extends Component {
   constructor(props) {
@@ -137,25 +126,5 @@ class Registration extends Component {
     }
   }
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 export default Registration
