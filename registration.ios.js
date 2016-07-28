@@ -55,66 +55,56 @@ class Registration extends Component {
         />
 
         <ScrollView style={{padding: 50}} ref='scrollView'>
-        <TextInput
-         ref='FirstName'
-         style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
-         placeholder=" First Name"
-         onChangeText={(text) => this.setState({first_name: text})}
-         onSubmitEditing={(event) => {
-           this.refs.LastName.focus();
-         }}
-       />
-       <TextInput
-         ref='LastName'
-         style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
-         placeholder=" Last Name"
-         onChangeText={(text) => this.setState({last_name: text})}
-         onSubmitEditing={(event) => {
-           this.refs.PhotoUrl.focus();
-         }}
-         onFocus={this.inputFocused.bind(this, 'LastName')}
-        />
-       <TextInput
-         ref='PhotoUrl'
-         style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
-         placeholder=" Photo URL"
-         onChangeText={(text) => this.setState({photo_url: text})}
-         onSubmitEditing={(event) => {
-           this.refs.PaymentUrl.focus();
-         }}
-         onFocus={this.inputFocused.bind(this, 'PhotoUrl')}
-         />
-       <TextInput
-         ref='PaymentUrl'
-         style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1, marginBottom: 1}}
-         placeholder=" Payment URL"
-         onChangeText={(text) => this.setState({payment_url: text})}
-         onFocus={this.inputFocused.bind(this, 'PaymentUrl')}
-       />
+          <TextInput
+            ref='FirstName'
+            style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
+            placeholder=" First Name"
+            onChangeText={(text) => this.setState({first_name: text})}
+            onSubmitEditing={(event) => {
+              this.refs.LastName.focus();
+            }}
+          />
+          <TextInput
+            ref='LastName'
+            style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
+            placeholder=" Last Name"
+            onChangeText={(text) => this.setState({last_name: text})}
+            onSubmitEditing={(event) => {
+              this.refs.PhotoUrl.focus();
+            }}
+            onFocus={this.inputFocused.bind(this, 'LastName')}
+          />
+          <TextInput
+            ref='PhotoUrl'
+            style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1}}
+            placeholder=" Photo URL"
+            onChangeText={(text) => this.setState({photo_url: text})}
+            onSubmitEditing={(event) => {
+              this.refs.PaymentUrl.focus();
+            }}
+            onFocus={this.inputFocused.bind(this, 'PhotoUrl')}
+          />
+          <TextInput
+            ref='PaymentUrl'
+            style={{fontSize: 20, height: 50, borderColor: 'gray', borderWidth: 2, padding: 3, marginTop: 1, marginBottom: 1}}
+            placeholder=" Payment URL"
+            onChangeText={(text) => this.setState({payment_url: text})}
+            onFocus={this.inputFocused.bind(this, 'PaymentUrl')}
+          />
 
-          <Button large success block
-            onPress={this.registerTippee.bind(this)}>
-            Submit Registration
-          </Button>
+          {(!this.state.loading) ? (
+            <Button large success block
+              onPress={this.registerTippee.bind(this)}
+              visible={(!this.state.loading)}>
+              Submit Registration
+            </Button>
+          ) : (
+            <Button large success block transparent visible={(this.state.loading)}>
+              Registering...
+            </Button>
+          )}
 
         </ScrollView>
-        <Modal
-          animationType={'fade'}
-          transparent={'true'}
-          visible={(this.state && this.state.loading)}
-        >
-          <View style={{
-            flex: 1,
-            backgroundColor: '#f5fcff',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: 20,
-          }}>
-            <Text>
-              Loading...
-            </Text>
-          </View>
-        </Modal>
       </View>
     );
   }
@@ -136,7 +126,7 @@ class Registration extends Component {
         AsyncStorage.setItem(
           'beacons',
           JSON.stringify(responseJson.beacons),
-          () => that.navigate("main")
+          () => that.navigate("active")
         )
       })
       .done();
