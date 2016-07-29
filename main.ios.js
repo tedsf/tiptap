@@ -130,7 +130,7 @@ class TipableTippee extends Component {
 
         <Text>{'\n'}</Text>
 
-        {(this.props.lastName) ? (
+        {(this.props.tippeeId) ? (
           <TipMaker
             tippeeId={ this.props.tippeeId }
             paymentUrl={ this.props.paymentUrl }
@@ -155,7 +155,7 @@ class NearestTipableTippee extends Component {
     }
   }
 
-  componentWillMount () {
+  componentDidMount () {
     DeviceEventEmitter.addListener(
       'beaconsDidRange',
       (data) => {
@@ -174,6 +174,7 @@ class NearestTipableTippee extends Component {
           .done()
         }
         else {
+          this.setState({tippeeId: ''})
           this.setState({firstName: 'No users are in your area'})
           this.setState({lastName: ''})
           this.setState({photoUrl: 'http://i.imgur.com/CGB5Uv9.png'})
@@ -186,10 +187,10 @@ class NearestTipableTippee extends Component {
   render(){
     return (
       <TipableTippee
+        tippeeId={ this.state.tippeeId }
         firstName={ this.state.firstName }
         lastName={ this.state.lastName }
         photoUrl={ this.state.photoUrl }
-        tippeeId={ this.state.tippeeId }
         paymentUrl={ this.state.paymentUrl }
       />
     );
