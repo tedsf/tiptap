@@ -1,6 +1,6 @@
 # TipTap
 
-A mobile based payment system build with a decoupled React Native Front and Rails API backend.
+A mobile based payment system built with a decoupled React Native Front and Rails API backend.
 
 ##MVP
 
