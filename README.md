@@ -5,6 +5,7 @@ A mobile based payment system build with a decoupled React Native Front and Rail
 ##MVP
 
 - A user can open the app
+- A user can create a profile
 - A user can see when no other users are enabled
 - A user can view a user that is enabled for tips in the same area
 - A user can send tips to nearby users
